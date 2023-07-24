@@ -1,0 +1,16 @@
+.ant-input-group-wrapper {
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+    width: 338px;
+    border-radius: 12px;
+    .ant-input-wrapper {
+        .ant-input {
+            border: none;
+        }
+        .ant-input-group-addon {
+            .ant-btn {
+                border-radius: 12px !important;
+                background: #2f80ed;
+            }
+        }
+    }
+}

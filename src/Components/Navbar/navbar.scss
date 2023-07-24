@@ -4,4 +4,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    &-options {
+        display: flex;
+        align-items: center;
+    }
 }

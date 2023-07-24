@@ -1,6 +1,8 @@
 .profile-info-wrapper {
     display: flex;
     align-items: center;
+    min-width: 10rem;
+    margin-left: 3.5rem;
 
     .name {
         margin: 0 11px;
