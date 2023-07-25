@@ -1,7 +1,10 @@
 import React from "react";
+import Image from "next/image";
+import { Typography } from "antd";
+
+import AvatarList from "@src/Components/AvatarList";
 
 import "./boardCard.scss";
-import Image from "next/image";
 
 type CardData = {
     image: string;
@@ -21,7 +24,15 @@ export default function BoardCard({
 }: Props) {
     return (
         <div className="board-card">
-            <Image width={220} height={130} src={image} alt="background" />
+            <Image
+                className="board-banner"
+                width={220}
+                height={130}
+                src={image}
+                alt="background"
+            />
+            <Typography.Title className="title">{title}</Typography.Title>
+            <AvatarList members={members} />
         </div>
     );
 }

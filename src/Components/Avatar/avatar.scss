@@ -1,5 +1,11 @@
 .avatar-wrapper {
     .ant-avatar {
-        border-radius: 12px;
+        border-radius: 10px;
+
+        .ant-avatar-string {
+            color: #fff;
+            font-size: 12px;
+            font-weight: 500;
+        }
     }
 }

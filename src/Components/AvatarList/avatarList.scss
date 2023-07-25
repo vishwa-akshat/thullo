@@ -1,0 +1,11 @@
+.avatar-list {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .remaining-members-count {
+        color: #bdbdbd;
+        font-size: 14px;
+        font-weight: 500;
+    }
+}
