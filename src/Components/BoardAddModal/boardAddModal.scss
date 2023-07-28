@@ -1,0 +1,77 @@
+.board-add-modal {
+    width: 310px !important;
+
+    .create-board-btn {
+        background: #2f80ed;
+    }
+
+    .ant-modal-close {
+        background: #2f80ed;
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+
+        svg {
+            fill: #fff;
+        }
+
+        &:hover {
+            background: #207ffc;
+        }
+    }
+
+    .cover-image {
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 10px;
+    }
+
+    .board-input-title {
+        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+        color: #bdbdbd;
+        font-size: 12px;
+        font-weight: 500;
+        height: 40px;
+        border-radius: 8px;
+        border-color: #bdbdbd44;
+    }
+
+    .btn-wrapper {
+        margin: 20px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .ant-modal-footer {
+        margin-top: 22px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        .ant-btn-default {
+            border: none;
+            box-shadow: none;
+            color: #828282;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .ant-btn-primary {
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            padding: 5px 8px;
+            border-radius: 10px;
+            background: #2f80ed;
+            min-width: 85px;
+            height: 35px;
+            letter-spacing: 0.5px;
+        }
+
+        .ant-btn-icon {
+            margin-inline-end: 5px !important;
+        }
+    }
+}
