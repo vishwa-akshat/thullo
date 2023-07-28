@@ -9,15 +9,21 @@ import Image from "next/image";
 type Props = {
     children: string;
     icon?: SVGProps<SVGElement>;
+    onClickHandler: () => void;
 };
 
-export default function Button({ children, icon }: Props) {
+export default function Button({ children, icon, onClickHandler }: Props) {
+    const handleBtnClick = () => {
+        onClickHandler();
+    };
+
     if (icon) {
         return (
             <AntButton
                 icon={<Image width={20} height={20} src={icon} alt="icon" />}
                 className="button"
                 type="primary"
+                onClick={handleBtnClick}
             >
                 {children}
             </AntButton>

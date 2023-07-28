@@ -2,7 +2,6 @@
 
 import React from "react";
 import Image from "next/image";
-import { UserOutlined } from "@ant-design/icons";
 import { Avatar as AntAvatar } from "antd";
 
 import "./avatar.scss";
