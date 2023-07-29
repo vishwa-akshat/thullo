@@ -1,0 +1,11 @@
+.board-team-members {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-left: 20px;
+
+    .add-team-member-button {
+        background: #2f80ed;
+        border-radius: 10px;
+    }
+}
