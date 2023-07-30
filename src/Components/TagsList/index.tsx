@@ -4,11 +4,13 @@ import { Tag } from "antd";
 
 import "./tagsList.scss";
 
+type Task = {
+    name: string;
+    color: string;
+};
+
 type Props = {
-    tags: {
-        name: string;
-        color: string;
-    }[];
+    tags: Task[];
 };
 
 export default function TagsList({ tags }: Props) {

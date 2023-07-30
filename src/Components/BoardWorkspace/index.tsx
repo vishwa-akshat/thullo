@@ -40,8 +40,8 @@ export default function BoardWorkspace({}: Props) {
         <div className="board-workspace">
             <div className="">
                 <Typography.Text>Backlog 🤔</Typography.Text>
-                {BacklogTaskData.map((task) => (
-                    <TaskCard taskData={task} />
+                {BacklogTaskData.map((task, idx) => (
+                    <TaskCard key={idx} taskData={task} />
                 ))}
             </div>
             <div className="">In Progress 📚</div>
