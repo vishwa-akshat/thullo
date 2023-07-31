@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Avatar as AntAvatar, Typography } from "antd";
+import { Typography } from "antd";
 
 import Avatar from "@src/Components/Avatar";
 

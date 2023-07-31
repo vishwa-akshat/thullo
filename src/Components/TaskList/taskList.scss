@@ -1,0 +1,20 @@
+.task-list {
+    .task-list-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+
+        .task-title {
+            color: #333;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+    }
+
+    .task-droppable-zone {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+}

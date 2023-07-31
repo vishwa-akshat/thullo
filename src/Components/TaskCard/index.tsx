@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { Typography } from "antd";
+import { Draggable } from "react-beautiful-dnd";
 
 import TagsList from "@src/Components/TagsList";
 import BoardTeamMember from "@src/Components/BoardTeamMembers";
@@ -31,27 +32,36 @@ export default function TaskCard({
     taskData: { image, title, tags, members, comments, attachments },
 }: Props) {
     return (
-        <div className="task-card">
-            {image && (
-                <Image
-                    className="cover"
-                    src={image}
-                    alt="cover"
-                    height={130}
-                    width={220}
-                />
+        <Draggable draggableId={title}>
+            {(provided, snapshot) => (
+                <div
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                    className="task-card"
+                >
+                    {image && (
+                        <Image
+                            className="cover"
+                            src={image}
+                            alt="cover"
+                            height={130}
+                            width={220}
+                        />
+                    )}
+                    <Typography.Text className="title">{title}</Typography.Text>
+                    <div className="tags-list-wrapper">
+                        <TagsList tags={tags} />
+                    </div>
+                    <div className="team-members-and-attachment-info">
+                        <BoardTeamMember members={members} />
+                        <AttachmentAndCommentInfo
+                            comments={comments}
+                            attachments={attachments}
+                        />
+                    </div>
+                </div>
             )}
-            <Typography.Text className="title">{title}</Typography.Text>
-            <div className="tags-list-wrapper">
-                <TagsList tags={tags} />
-            </div>
-            <div className="team-members-and-attachment-info">
-                <BoardTeamMember members={members} />
-                <AttachmentAndCommentInfo
-                    comments={comments}
-                    attachments={attachments}
-                />
-            </div>
-        </div>
+        </Draggable>
     );
 }
