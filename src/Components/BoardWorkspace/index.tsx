@@ -1,26 +1,39 @@
 "use client";
 
-import { DragDropContext } from "react-beautiful-dnd";
+import { DragDropContext, DropResult } from "react-beautiful-dnd";
+
+import TaskList from "../TaskList";
+
+import useTaskStore from "@src/store/taskStore";
 
 import "./boardWorkspace.scss";
-import TaskList from "../TaskList";
 
 type Props = {};
 
 export default function BoardWorkspace({}: Props) {
+    const [
+        backlogTasksId,
+        inProgressTasksId,
+        inReviewTasksId,
+        completedTasksId,
+    ] = useTaskStore((state) => [
+        state.backlogTasksId,
+        state.inProgressTasksId,
+        state.inReviewTasksId,
+        state.completedTasksId,
+    ]);
+
+    function onDragEnd(result: DropResult) {
+        throw new Error("Function not implemented.");
+    }
+
     return (
-        <DragDropContext
-        // onBeforeCapture={onBeforeCapture}
-        // onBeforeDragStart={onBeforeDragStart}
-        // onDragStart={onDragStart}
-        // onDragUpdate={onDragUpdate}
-        // onDragEnd={onDragEnd}
-        >
+        <DragDropContext onDragEnd={onDragEnd}>
             <div className="board-workspace">
-                <TaskList listType="backlog" />
-                <div className="">In Progress 📚T</div>
-                <div className="">In Review ⚙️</div>
-                <div className="">Completed 🙌🏽</div>
+                <TaskList title="Backlog 🤔" tasksId={backlogTasksId} />
+                <TaskList title="In Progress 📚" tasksId={inProgressTasksId} />
+                <TaskList title="In Review ⚙️" tasksId={inReviewTasksId} />
+                <TaskList title="Completed 🙌🏽" tasksId={completedTasksId} />
                 <div className="">Add another list</div>
             </div>
         </DragDropContext>

@@ -1,5 +1,5 @@
 "use client";
-
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Typography } from "antd";
 import { Droppable } from "react-beautiful-dnd";
@@ -8,43 +8,34 @@ import TaskCard from "@src/Components/TaskCard";
 
 import moreIcon from "@src/assets/more.svg";
 
+import useTaskStore from "@src/store/taskStore";
+
 import "./taskList.scss";
 
-type Props = {};
+type Tasks = {};
 
-const BacklogTaskData = [
-    {
-        image: "",
-        title: "✋🏿 Add what you'd like to work on below",
-        tags: [{ name: "Concept", color: "purple" }],
-        attachments: 1,
-        comments: 0,
-        members: [],
-    },
-    {
-        image: "https://images.unsplash.com/photo-1689890076926-afb4add0bc86?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-        title: "Github jobs challenge",
-        tags: [
-            { name: "Technical", color: "blue" },
-            { name: "Design", color: "green" },
-        ],
-        attachments: 1,
-        comments: 2,
-        members: [
-            {
-                name: "Suzie",
-                avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80",
-            },
-        ],
-    },
-];
+type Props = {
+    title: string;
+    tasksId: any;
+};
 
-export default function TaskList({}: Props) {
+export default function TaskList({ title, tasksId }: Props) {
+    const [tasks, setTasks] = useState([]);
+
+    const getTasks = useTaskStore((state) => state.getTasks);
+
+    useEffect(() => {
+        const resTasks = getTasks(tasksId);
+        setTasks(resTasks);
+    }, []);
+
+    if (tasks.length === 0) return <></>;
+
     return (
         <div className="task-list">
             <div className="task-list-header">
                 <Typography.Text className="task-title">
-                    Backlog 🤔
+                    {title}
                 </Typography.Text>
                 <Image width={20} src={moreIcon} alt="more" />
             </div>
@@ -55,7 +46,7 @@ export default function TaskList({}: Props) {
                         ref={provided.innerRef}
                         className="task-droppable-zone"
                     >
-                        {BacklogTaskData.map((task, idx) => (
+                        {tasks.map((task, idx) => (
                             <TaskCard key={idx} taskData={task} />
                         ))}
                         {provided.placeholder}
