@@ -15,21 +15,19 @@ import "./taskList.scss";
 type Tasks = {};
 
 type Props = {
+    id: string;
     title: string;
-    tasksId: any;
+    tasks: any;
 };
 
-export default function TaskList({ title, tasksId }: Props) {
-    const [tasks, setTasks] = useState([]);
-
-    const getTasks = useTaskStore((state) => state.getTasks);
+export default function TaskList({ id, title, tasks }: Props) {
+    const [activeTasks, setActiveTasks] = useState(tasks);
 
     useEffect(() => {
-        const resTasks = getTasks(tasksId);
-        setTasks(resTasks);
-    }, []);
-
-    if (tasks.length === 0) return <></>;
+        if (!tasks) {
+            setActiveTasks(tasks);
+        }
+    }, [tasks]);
 
     return (
         <div className="task-list">
@@ -39,16 +37,20 @@ export default function TaskList({ title, tasksId }: Props) {
                 </Typography.Text>
                 <Image width={20} src={moreIcon} alt="more" />
             </div>
-            <Droppable droppableId="droppable-1">
+            <Droppable droppableId={id}>
                 {(provided, snapshot) => (
                     <div
                         {...provided.droppableProps}
                         ref={provided.innerRef}
                         className="task-droppable-zone"
                     >
-                        {tasks.map((task, idx) => (
-                            <TaskCard key={idx} taskData={task} />
-                        ))}
+                        {activeTasks.length === 0 ? (
+                            <></>
+                        ) : (
+                            activeTasks.map((task, idx) => (
+                                <TaskCard id={idx} key={idx} taskData={task} />
+                            ))
+                        )}
                         {provided.placeholder}
                     </div>
                 )}

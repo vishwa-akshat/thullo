@@ -12,28 +12,59 @@ type Props = {};
 
 export default function BoardWorkspace({}: Props) {
     const [
-        backlogTasksId,
-        inProgressTasksId,
-        inReviewTasksId,
-        completedTasksId,
+        backlogTasks,
+        progressTasks,
+        reviewTasks,
+        completedTasks,
+        updateTasksStack,
     ] = useTaskStore((state) => [
-        state.backlogTasksId,
-        state.inProgressTasksId,
-        state.inReviewTasksId,
-        state.completedTasksId,
+        state.backlogTasks,
+        state.progressTasks,
+        state.reviewTasks,
+        state.completedTasks,
+        state.updateTasksStack,
     ]);
 
+    const tasksColumns = [
+        {
+            id: "backlog",
+            title: "Backlog 🤔",
+            tasks: backlogTasks,
+        },
+        {
+            id: "progress",
+            title: "In Progress 📚",
+            tasks: progressTasks,
+        },
+        {
+            id: "review",
+            title: "In Review ⚙️",
+            tasks: reviewTasks,
+        },
+        {
+            id: "completed",
+            title: "Completed 🙌🏽",
+            tasks: completedTasks,
+        },
+    ];
+
     function onDragEnd(result: DropResult) {
-        throw new Error("Function not implemented.");
+        const { destination, source } = result;
+        if (destination === null) return;
+        updateTasksStack(destination, source);
     }
 
     return (
         <DragDropContext onDragEnd={onDragEnd}>
             <div className="board-workspace">
-                <TaskList title="Backlog 🤔" tasksId={backlogTasksId} />
-                <TaskList title="In Progress 📚" tasksId={inProgressTasksId} />
-                <TaskList title="In Review ⚙️" tasksId={inReviewTasksId} />
-                <TaskList title="Completed 🙌🏽" tasksId={completedTasksId} />
+                {tasksColumns.map((col) => (
+                    <TaskList
+                        key={col.id}
+                        id={col.id}
+                        title={col.title}
+                        tasks={col.tasks}
+                    />
+                ))}
                 <div className="">Add another list</div>
             </div>
         </DragDropContext>

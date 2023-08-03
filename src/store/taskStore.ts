@@ -3,25 +3,35 @@ import { create } from "zustand";
 import { Tasks } from "./tempTask";
 
 interface TaskState {
-    tasks: any;
-    backlogTasksId: Number[];
-    inProgressTasksId: Number[];
-    inReviewTasksId: Number[];
-    completedTasksId: Number[];
-    getTasks: (ids: Number[]) => any;
+    backlogTasks: any;
+    progressTasks: any;
+    reviewTasks: any;
+    completedTasks: any;
+    // updateTasksStack: (ids: string) => void;
 }
 
 const useTaskStore = create<TaskState>((set, get) => ({
-    tasks: Tasks,
-    backlogTasksId: [1, 2],
-    inProgressTasksId: [3, 4, 5],
-    inReviewTasksId: [6, 7],
-    completedTasksId: [8],
-    getTasks: (ids: Number[]) => {
-        const resultTasks = get().tasks.filter((task: any) =>
-            ids.includes(task.id)
-        );
-        return resultTasks;
+    backlogTasks: Tasks,
+    progressTasks: [],
+    reviewTasks: [],
+    completedTasks: [],
+    getVariable: (taskList) => {
+        switch (taskList) {
+            case "backlog":
+                return get().backlogTasks;
+            case "progress":
+                return get().progressTasks;
+            case "review":
+                return get().reviewTasks;
+            case "completed":
+                return get().completedTasks;
+        }
+    },
+    updateTasksStack: (destination, source) => {
+        const destinationList = get().getVariable(destination.droppableId);
+        const sourceList = get().getVariable(source.droppableId);
+        const addItem = sourceList.splice(source.index, 1);
+        destinationList.splice(destination.index, 0, addItem[0]);
     },
 }));
 

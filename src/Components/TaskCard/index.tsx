@@ -10,6 +10,7 @@ import "./taskCard.scss";
 import AttachmentAndCommentInfo from "../AttachmentAndCommentInfo";
 
 type Task = {
+    id: string;
     image: string;
     title: string;
     tags: {
@@ -26,13 +27,15 @@ type Task = {
 
 type Props = {
     taskData: Task;
+    id: number;
 };
 
 export default function TaskCard({
     taskData: { image, title, tags, members, comments, attachments },
+    id,
 }: Props) {
     return (
-        <Draggable draggableId={title}>
+        <Draggable draggableId={id.toString()} index={id}>
             {(provided, snapshot) => (
                 <div
                     ref={provided.innerRef}
