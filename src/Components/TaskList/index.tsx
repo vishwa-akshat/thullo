@@ -1,5 +1,4 @@
 "use client";
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Typography } from "antd";
 import { Droppable } from "react-beautiful-dnd";
@@ -8,11 +7,20 @@ import TaskCard from "@src/Components/TaskCard";
 
 import moreIcon from "@src/assets/more.svg";
 
-import useTaskStore from "@src/store/taskStore";
-
 import "./taskList.scss";
 
-type Tasks = {};
+type Tasks = {
+    id: string;
+    image: string;
+    title: string;
+    tags: { name: string; color: string }[];
+    attachments: number;
+    comments: number;
+    members: {
+        name: string;
+        avatar: string;
+    }[];
+};
 
 type Props = {
     id: string;
@@ -21,14 +29,6 @@ type Props = {
 };
 
 export default function TaskList({ id, title, tasks }: Props) {
-    const [activeTasks, setActiveTasks] = useState(tasks);
-
-    useEffect(() => {
-        if (!tasks) {
-            setActiveTasks(tasks);
-        }
-    }, [tasks]);
-
     return (
         <div className="task-list">
             <div className="task-list-header">
@@ -44,10 +44,10 @@ export default function TaskList({ id, title, tasks }: Props) {
                         ref={provided.innerRef}
                         className="task-droppable-zone"
                     >
-                        {activeTasks.length === 0 ? (
+                        {tasks.length === 0 ? (
                             <></>
                         ) : (
-                            activeTasks.map((task, idx) => (
+                            tasks.map((task: Tasks, idx: number) => (
                                 <TaskCard id={idx} key={idx} taskData={task} />
                             ))
                         )}
