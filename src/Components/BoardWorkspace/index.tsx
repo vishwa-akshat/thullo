@@ -1,7 +1,5 @@
 "use client";
 
-import { DragDropContext, DropResult } from "react-beautiful-dnd";
-
 import TaskList from "../TaskList";
 
 import useTaskStore from "@src/store/taskStore";
@@ -48,25 +46,25 @@ export default function BoardWorkspace({}: Props) {
         },
     ];
 
-    function onDragEnd(result: DropResult) {
-        const { destination, source } = result;
-        if (destination === null) return;
-        updateTasksStack(destination, source);
-    }
+    // function onDragEnd(result: DropResult) {
+    //     const { destination, source } = result;
+    //     if (destination === null) return;
+    //     updateTasksStack(destination, source);
+    // }
 
     return (
-        <DragDropContext onDragEnd={onDragEnd}>
-            <div className="board-workspace">
-                {tasksColumns.map((col) => (
-                    <TaskList
-                        key={col.id}
-                        id={col.id}
-                        title={col.title}
-                        tasks={col.tasks}
-                    />
-                ))}
-                <div className="">Add another list</div>
-            </div>
-        </DragDropContext>
+        // <DragDropContext onDragEnd={onDragEnd}>
+        <div className="board-workspace">
+            {tasksColumns.map((col) => (
+                <TaskList
+                    key={col.id}
+                    id={col.id}
+                    title={col.title}
+                    tasks={col.tasks}
+                />
+            ))}
+            <div className="">Add another list</div>
+        </div>
+        // </DragDropContext>
     );
 }

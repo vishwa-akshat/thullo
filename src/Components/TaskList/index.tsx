@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { Typography } from "antd";
-import { Droppable } from "react-beautiful-dnd";
+// import { Droppable } from "react-beautiful-dnd";
 
 import TaskCard from "@src/Components/TaskCard";
 
@@ -28,7 +28,7 @@ type Props = {
     tasks: any;
 };
 
-export default function TaskList({ id, title, tasks }: Props) {
+export default function TaskList({ id = "1", title, tasks }: Props) {
     return (
         <div className="task-list">
             <div className="task-list-header">
@@ -37,24 +37,24 @@ export default function TaskList({ id, title, tasks }: Props) {
                 </Typography.Text>
                 <Image width={20} src={moreIcon} alt="more" />
             </div>
-            <Droppable droppableId={id}>
-                {(provided, snapshot) => (
-                    <div
-                        {...provided.droppableProps}
-                        ref={provided.innerRef}
-                        className="task-droppable-zone"
-                    >
-                        {tasks.length === 0 ? (
-                            <></>
-                        ) : (
-                            tasks.map((task: Tasks, idx: number) => (
-                                <TaskCard id={idx} key={idx} taskData={task} />
-                            ))
-                        )}
-                        {provided.placeholder}
-                    </div>
+            {/* <Droppable droppableId={id}>
+                {(provided, snapshot) => ( */}
+            <div
+                // {...provided.droppableProps}
+                // ref={provided.innerRef}
+                className="task-droppable-zone"
+            >
+                {tasks.length === 0 ? (
+                    <></>
+                ) : (
+                    tasks.map((task: Tasks, idx: number) => (
+                        <TaskCard id={idx} key={idx} taskData={task} />
+                    ))
                 )}
-            </Droppable>
+                {/* {provided.placeholder} */}
+            </div>
+            {/* )} */}
+            {/* </Droppable> */}
         </div>
     );
 }
