@@ -1,5 +1,5 @@
 "use client";
-
+import { SetStateAction, useState } from "react";
 import Image from "next/image";
 import { Modal, Input } from "antd";
 
@@ -16,17 +16,30 @@ import "./boardAddModal.scss";
 type Props = {};
 
 export default function BoardAddModal({}: Props) {
+    const [title, setTitle] = useState("");
+
     const {
         isBoardAddModalOpen,
         boardAddModalHandleOk,
         boardAddModalHandleCancel,
     } = useBoardAddModalStore();
 
+    const handleTitleChange = (event) => {
+        setTitle(event.target.value);
+    };
+
+    const handleModalSubmit = () => {
+        boardAddModalHandleOk({
+            cover: "https://images.unsplash.com/photo-1690081541249-5725c2cb5029?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+            title,
+        });
+    };
+
     return (
         <Modal
             className="board-add-modal"
             open={isBoardAddModalOpen}
-            onOk={boardAddModalHandleOk}
+            onOk={handleModalSubmit}
             okText={`Create`}
             okButtonProps={{
                 icon: <Image width={17} height={17} src={addIcon} alt="icon" />,
@@ -43,6 +56,7 @@ export default function BoardAddModal({}: Props) {
             <Input
                 className="board-input-title"
                 placeholder="Add board title"
+                onChange={handleTitleChange}
             />
             <div className="btn-wrapper">
                 <GhostButton icon={imageIcon} onClickHandler={() => null}>

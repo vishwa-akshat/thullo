@@ -7,28 +7,37 @@ import AvatarList from "@src/Components/AvatarList";
 import "./boardCard.scss";
 
 type CardData = {
-    image: string;
+    cover: string;
     title: string;
-    members: {
-        name: string;
-        avatar: string;
-    }[];
+    // members: {
+    //     name: string;
+    //     avatar: string;
+    // }[];
 };
 
 type Props = {
     cardData: CardData;
 };
 
-export default function BoardCard({
-    cardData: { image, title, members },
-}: Props) {
+const members = [
+    {
+        name: "Suzie",
+        avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80",
+    },
+    {
+        name: "Reh",
+        avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
+    },
+];
+
+export default function BoardCard({ cardData: { cover, title } }: Props) {
     return (
         <div className="board-card">
             <Image
                 className="board-banner"
                 width={220}
                 height={130}
-                src={image}
+                src={cover}
                 alt="background"
             />
             <Typography.Title className="title">{title}</Typography.Title>
