@@ -13,11 +13,8 @@ type Props = {
 };
 
 export default function VisibilityModal({ topPosition, leftPosition }: Props) {
-    const {
-        isVisibilityModalOpen,
-        visibilityModalHandleOk,
-        visibilityModalHandleCancel,
-    } = useVisibilityModalStore();
+    const { isVisibilityModalOpen, visibilityModalHandleCancel } =
+        useVisibilityModalStore();
 
     return (
         <Modal

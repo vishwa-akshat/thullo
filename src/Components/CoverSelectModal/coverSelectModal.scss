@@ -1,0 +1,22 @@
+.cover-select-modal {
+    width: 270px !important;
+
+    .ant-modal-content {
+        padding: 12px;
+    }
+
+    .modal-heading {
+        color: #4f4f4f;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .modal-description {
+        color: #828282;
+        font-size: 14px;
+    }
+
+    .search-input-wrapper {
+        margin: 12px 0 20px;
+    }
+}

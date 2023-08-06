@@ -5,9 +5,11 @@ import { Modal, Input } from "antd";
 
 import GhostButton from "@src/Components/GhostButton";
 import VisibilityModal from "@src/Components/VisibilityModal";
+import CoverSelectModal from "@src/Components/CoverSelectModal";
 
 import useBoardAddModalStore from "@src/store/boardAddModalState";
 import useVisibilityModalStore from "@src/store/visibilityModalState";
+import useCoverSelectModalStore from "@src/store/coverSelectModalState";
 import useBoardStore from "@src/store/boardStore";
 
 import addIcon from "@src/assets/add.svg";
@@ -30,6 +32,10 @@ export default function BoardAddModal({}: Props) {
 
     const showVisibilityModal = useVisibilityModalStore(
         (state) => state.showVisibilityModal
+    );
+
+    const showCoverSelectModal = useCoverSelectModalStore(
+        (state) => state.showCoverSelectModal
     );
 
     const visibilityOfBoard = useBoardStore((state) => state.visibilityOfBoard);
@@ -69,7 +75,10 @@ export default function BoardAddModal({}: Props) {
                 onChange={handleTitleChange}
             />
             <div className="btn-wrapper">
-                <GhostButton icon={imageIcon} onClickHandler={() => null}>
+                <GhostButton
+                    icon={imageIcon}
+                    onClickHandler={() => showCoverSelectModal()}
+                >
                     Cover
                 </GhostButton>
                 <GhostButton
@@ -82,6 +91,7 @@ export default function BoardAddModal({}: Props) {
                 </GhostButton>
             </div>
             <VisibilityModal topPosition={310} leftPosition={100} />
+            <CoverSelectModal topPosition={310} leftPosition={-80} />
         </Modal>
     );
 }
