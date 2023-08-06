@@ -1,0 +1,19 @@
+.visibility-modal {
+    max-width: 240px !important;
+
+    .modal-heading {
+        color: #4f4f4f;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .modal-info {
+        color: #828282;
+        font-size: 14px;
+        letter-spacing: -0.42px;
+    }
+
+    .ant-modal-content {
+        padding: 12px;
+    }
+}

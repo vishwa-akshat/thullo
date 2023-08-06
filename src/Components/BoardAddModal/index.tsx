@@ -1,15 +1,19 @@
 "use client";
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { Modal, Input } from "antd";
 
 import GhostButton from "@src/Components/GhostButton";
+import VisibilityModal from "@src/Components/VisibilityModal";
 
 import useBoardAddModalStore from "@src/store/boardAddModalState";
+import useVisibilityModalStore from "@src/store/visibilityModalState";
+import useBoardStore from "@src/store/boardStore";
 
 import addIcon from "@src/assets/add.svg";
 import lockIcon from "@src/assets/lock.svg";
 import imageIcon from "@src/assets/image.svg";
+import publicIcon from "@src/assets/public.svg";
 
 import "./boardAddModal.scss";
 
@@ -23,6 +27,12 @@ export default function BoardAddModal({}: Props) {
         boardAddModalHandleOk,
         boardAddModalHandleCancel,
     } = useBoardAddModalStore();
+
+    const showVisibilityModal = useVisibilityModalStore(
+        (state) => state.showVisibilityModal
+    );
+
+    const visibilityOfBoard = useBoardStore((state) => state.visibilityOfBoard);
 
     const handleTitleChange = (event) => {
         setTitle(event.target.value);
@@ -62,10 +72,16 @@ export default function BoardAddModal({}: Props) {
                 <GhostButton icon={imageIcon} onClickHandler={() => null}>
                     Cover
                 </GhostButton>
-                <GhostButton icon={lockIcon} onClickHandler={() => null}>
-                    Private
+                <GhostButton
+                    icon={
+                        visibilityOfBoard === "Public" ? publicIcon : lockIcon
+                    }
+                    onClickHandler={() => showVisibilityModal()}
+                >
+                    {visibilityOfBoard}
                 </GhostButton>
             </div>
+            <VisibilityModal topPosition={310} leftPosition={100} />
         </Modal>
     );
 }

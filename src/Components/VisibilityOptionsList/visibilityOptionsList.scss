@@ -1,0 +1,31 @@
+.option-wrapper {
+    .option {
+        margin: 12px 0;
+        padding: 10px 12px;
+        cursor: pointer;
+        border-radius: 10px;
+        transition: all 0.2s ease;
+
+        .visibility-type {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            .visibility-option-text {
+                color: #4f4f4f;
+                font-size: 14px;
+                font-weight: 500;
+            }
+        }
+
+        .visibility-info {
+            color: #828282;
+            font-size: 12px;
+            font-weight: 400;
+        }
+
+        &:hover {
+            background: #f2f2f2;
+        }
+    }
+}
