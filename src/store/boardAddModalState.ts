@@ -5,7 +5,11 @@ import useBoardStore from "./boardStore";
 interface ModalAddState {
     isBoardAddModalOpen: boolean;
     showBoardAddModal: () => void;
-    boardAddModalHandleOk: (params: { cover: string; title: string }) => void;
+    boardAddModalHandleOk: (params: {
+        cover: string;
+        title: string;
+        visibility: string;
+    }) => void;
     boardAddModalHandleCancel: () => void;
 }
 
@@ -15,7 +19,9 @@ const useBoardAddModalStore = create<ModalAddState>((set) => ({
         set({ isBoardAddModalOpen: true });
     },
     boardAddModalHandleOk: (args) => {
-        useBoardStore.getState().setBoard({ ...args });
+        useBoardStore.getState().setBoard({
+            ...args,
+        });
         set({ isBoardAddModalOpen: false });
     },
     boardAddModalHandleCancel: () => {

@@ -9,12 +9,22 @@ const unsplash = createApi({
 
 interface CoverPhotosState {
     photos: Photos[];
+    getPhotosList: () => void;
+    getSearchedPhotos: (query: string) => void;
 }
 
 const useCoverPhotosStore = create<CoverPhotosState>((set) => ({
     photos: [],
     getPhotosList: async () => {
         const { response } = await unsplash.photos.list({
+            page: 1,
+            perPage: 12,
+        });
+        set({ photos: response.results });
+    },
+    getSearchedPhotos: async (query) => {
+        const { response } = await unsplash.search.getPhotos({
+            query,
             page: 1,
             perPage: 12,
         });

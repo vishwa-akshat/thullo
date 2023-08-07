@@ -39,6 +39,7 @@ export default function BoardAddModal({}: Props) {
     );
 
     const visibilityOfBoard = useBoardStore((state) => state.visibilityOfBoard);
+    const coverOfBoard = useBoardStore((state) => state.coverOfBoard);
 
     const handleTitleChange = (event) => {
         setTitle(event.target.value);
@@ -46,8 +47,9 @@ export default function BoardAddModal({}: Props) {
 
     const handleModalSubmit = () => {
         boardAddModalHandleOk({
-            cover: "https://images.unsplash.com/photo-1690081541249-5725c2cb5029?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+            cover: coverOfBoard,
             title,
+            visibility: visibilityOfBoard,
         });
     };
 
@@ -63,7 +65,7 @@ export default function BoardAddModal({}: Props) {
             onCancel={boardAddModalHandleCancel}
         >
             <Image
-                src="https://images.unsplash.com/photo-1690040849147-cb9810b8ca3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                src={coverOfBoard}
                 alt="cover"
                 width={260}
                 height={80}
