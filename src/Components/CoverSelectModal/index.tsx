@@ -1,12 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Modal } from "antd";
 
 import SearchInput from "@src/Components/SearchInput";
 import ImageList from "@src/Components/ImageList";
 
 import useCoverSelectModalStore from "@src/store/coverSelectModalState";
+import useCoverPhotosStore from "@src/store/coverPhotosStore";
 
 import "./coverSelectModal.scss";
 
@@ -18,6 +19,12 @@ type Props = {
 export default function CoverSelectModal({ topPosition, leftPosition }: Props) {
     const { isCoverSelectModalOpen, coverSelectModalHandleCancel } =
         useCoverSelectModalStore();
+
+    const getPhotosList = useCoverPhotosStore((state) => state.getPhotosList);
+
+    useEffect(() => {
+        getPhotosList();
+    }, []);
 
     return (
         <Modal

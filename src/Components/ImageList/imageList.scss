@@ -4,6 +4,7 @@
     gap: 8px;
 
     .cover-image {
+        object-fit: cover;
         justify-self: center;
         border-radius: 8px;
     }
