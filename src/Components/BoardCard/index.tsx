@@ -1,6 +1,9 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import { Typography } from "antd";
+import { useRouter } from "next/navigation";
 
 import AvatarList from "@src/Components/AvatarList";
 
@@ -31,8 +34,14 @@ const members = [
 ];
 
 export default function BoardCard({ cardData: { cover, title } }: Props) {
+    const router = useRouter();
+
+    const handleBoardCardClick = () => {
+        router.push(`/board/${title}`);
+    };
+
     return (
-        <div className="board-card">
+        <div className="board-card" onClick={handleBoardCardClick}>
             <Image
                 className="board-banner"
                 width={220}
