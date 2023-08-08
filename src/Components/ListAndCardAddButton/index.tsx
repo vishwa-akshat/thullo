@@ -5,11 +5,21 @@ import addIcon from "@src/assets/addBlue.svg";
 import "./listAndCardAddButton.scss";
 import Image from "next/image";
 
-type Props = { children: string };
+type Props = {
+    children: string;
+    onClickHandler: () => void;
+};
 
-export default function ListAndCardAddButton({ children }: Props) {
+export default function ListAndCardAddButton({
+    children,
+    onClickHandler,
+}: Props) {
     return (
-        <div className="list-and-card-add-button">
+        <div
+            role="button"
+            onClick={onClickHandler}
+            className="list-and-card-add-button"
+        >
             {children}
             <Image src={addIcon} width={20} height={20} alt="add" />
         </div>

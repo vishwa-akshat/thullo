@@ -1,9 +1,11 @@
 import { create } from "zustand";
+import uniqid from "uniqid";
 
 import { Tasks } from "./tempTask";
 
 interface TaskState {
-    tasksList: [];
+    tasksList: any;
+    addTaskList: (title: string) => void;
     // backlogTasks: any;
     // progressTasks: any;
     // reviewTasks: any;
@@ -13,6 +15,11 @@ interface TaskState {
 
 const useTaskStore = create<TaskState>((set, get) => ({
     tasksList: [],
+    addTaskList: (title) => {
+        set((state) => ({
+            tasksList: [...state.tasksList, { id: uniqid(), title }],
+        }));
+    },
     // backlogTasks: Tasks,
     // progressTasks: [],
     // reviewTasks: [],

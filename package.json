@@ -20,7 +20,11 @@
         "react-dom": "18.2.0",
         "sass": "^1.63.6",
         "typescript": "5.0.4",
+        "uniqid": "^5.4.0",
         "unsplash-js": "^7.0.18",
         "zustand": "^4.3.9"
+    },
+    "devDependencies": {
+        "@types/uniqid": "^5.3.2"
     }
 }
