@@ -8,6 +8,7 @@ import TaskCard from "@src/Components/TaskCard";
 import moreIcon from "@src/assets/more.svg";
 
 import "./taskList.scss";
+import ListAndCardAddButton from "../ListAndCardAddButton";
 
 type Tasks = {
     id: string;
@@ -23,25 +24,19 @@ type Tasks = {
 };
 
 type Props = {
-    id: string;
-    title: string;
     tasks: any;
 };
 
-export default function TaskList({ id = "1", title, tasks }: Props) {
+export default function TaskList({ tasks }: Props) {
     return (
         <div className="task-list">
             <div className="task-list-header">
                 <Typography.Text className="task-title">
-                    {title}
+                    {tasks.title}
                 </Typography.Text>
                 <Image width={20} src={moreIcon} alt="more" />
             </div>
-            {/* <Droppable droppableId={id}>
-                {(provided, snapshot) => ( */}
-            <div
-                // {...provided.droppableProps}
-                // ref={provided.innerRef}
+            {/* <div
                 className="task-droppable-zone"
             >
                 {tasks.length === 0 ? (
@@ -51,10 +46,12 @@ export default function TaskList({ id = "1", title, tasks }: Props) {
                         <TaskCard id={idx} key={idx} taskData={task} />
                     ))
                 )}
-                {/* {provided.placeholder} */}
-            </div>
-            {/* )} */}
-            {/* </Droppable> */}
+            </div> */}
+            <ListAndCardAddButton onClickHandler={() => null}>
+                {tasks?.tasksList?.length === 0
+                    ? "Add your card"
+                    : "Add another card"}
+            </ListAndCardAddButton>
         </div>
     );
 }

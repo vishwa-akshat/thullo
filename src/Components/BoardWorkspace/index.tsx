@@ -16,17 +16,14 @@ export default function BoardWorkspace({}: Props) {
         (state) => state.showTasksListAddModal
     );
 
+    const tasksList = useTaskStore((state) => state.tasksList);
+
     return (
         // <DragDropContext onDragEnd={onDragEnd}>
         <div className="board-workspace">
-            {/* {tasksColumns.map((col) => (
-                <TaskList
-                    key={col.id}
-                    id={col.id}
-                    title={col.title}
-                    tasks={col.tasks}
-                />
-            ))} */}
+            {tasksList.map((col: any) => (
+                <TaskList key={col.id} tasks={col} />
+            ))}
             <ListAndCardAddButton onClickHandler={showTasksListAddModal}>
                 Add another list
             </ListAndCardAddButton>

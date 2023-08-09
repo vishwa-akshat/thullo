@@ -17,7 +17,10 @@ const useTaskStore = create<TaskState>((set, get) => ({
     tasksList: [],
     addTaskList: (title) => {
         set((state) => ({
-            tasksList: [...state.tasksList, { id: uniqid(), title }],
+            tasksList: [
+                ...state.tasksList,
+                { id: uniqid(), title, tasksList: [] },
+            ],
         }));
     },
     // backlogTasks: Tasks,

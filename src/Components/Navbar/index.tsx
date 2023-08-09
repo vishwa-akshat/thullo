@@ -18,12 +18,14 @@ type Props = {};
 export default function Navbar({}: Props) {
     const navigationParams = useParams();
 
+    console.log(navigationParams);
+
     return (
         <div className="navbar">
             <div className="logo-wrapper">
                 <Image src={Logo} alt="thullo logo" />
             </div>
-            {navigationParams && (
+            {Object.keys(navigationParams).length !== 0 && (
                 <div className="board-nav-info">
                     <p>{`${navigationParams.boardname}`}</p>
                     <Divider type="vertical" />
@@ -35,7 +37,6 @@ export default function Navbar({}: Props) {
             <div className="navbar-options">
                 <SearchBar />
                 <ProfileInfo />
-                di
             </div>
         </div>
     );
