@@ -31,7 +31,7 @@ export default function TaskList({ tasks }: Props) {
                 <Typography.Text className="task-title">
                     {tasks.title}
                 </Typography.Text>
-                <TaskListColDropdown />
+                <TaskListColDropdown id={tasks.id} />
             </div>
             {/* <div
                 className="task-droppable-zone"

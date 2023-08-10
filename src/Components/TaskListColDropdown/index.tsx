@@ -4,27 +4,40 @@ import Image from "next/image";
 import { Dropdown } from "antd";
 import type { MenuProps } from "antd";
 
+import useTaskStore from "@src/store/taskStore";
+
 import moreIcon from "@src/assets/more.svg";
 
 import "./taskListColDropdown.scss";
 
-type Props = {};
+type Props = {
+    id: string;
+};
 
-const items: MenuProps["items"] = [
-    {
-        key: "1",
-        label: <div className="task-list-option">Rename</div>,
-    },
-    {
-        type: "divider",
-    },
-    {
-        key: "2",
-        label: <div className="task-list-option">Delete this list</div>,
-    },
-];
+export default function TaskListColDropdown({ id }: Props) {
+    const removeTaskList = useTaskStore((state) => state.removeTaskList);
 
-export default function TaskListColDropdown({}: Props) {
+    const items: MenuProps["items"] = [
+        {
+            key: "1",
+            label: <div className="task-list-option">Rename</div>,
+        },
+        {
+            type: "divider",
+        },
+        {
+            key: "2",
+            label: (
+                <div
+                    onClick={() => removeTaskList(id)}
+                    className="task-list-option"
+                >
+                    Delete this list
+                </div>
+            ),
+        },
+    ];
+
     return (
         <Dropdown
             trigger={["click"]}

@@ -7,11 +7,12 @@ import { Tasks } from "./tempTask";
 interface TaskState {
     tasksList: any;
     addTaskList: (title: string) => void;
+    removeTaskList: (id: string) => void;
 }
 
 const useTaskStore = create<TaskState>()(
     persist(
-        (set) => ({
+        (set, get) => ({
             tasksList: [],
             addTaskList: (title) => {
                 set((state) => ({
@@ -20,6 +21,12 @@ const useTaskStore = create<TaskState>()(
                         { id: uniqid(), title, tasksList: [] },
                     ],
                 }));
+            },
+            removeTaskList: (id) => {
+                let updatedTaskList = get().tasksList.filter(
+                    (task: { id: string }) => task.id !== id
+                );
+                set({ tasksList: updatedTaskList });
             },
         }),
         {
