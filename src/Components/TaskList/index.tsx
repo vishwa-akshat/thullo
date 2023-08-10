@@ -1,14 +1,11 @@
 "use client";
-import Image from "next/image";
 import { Typography } from "antd";
-// import { Droppable } from "react-beautiful-dnd";
 
 import TaskCard from "@src/Components/TaskCard";
-
-import moreIcon from "@src/assets/more.svg";
+import ListAndCardAddButton from "@src/Components/ListAndCardAddButton";
+import TaskListColDropdown from "@src/Components/TaskListColDropdown";
 
 import "./taskList.scss";
-import ListAndCardAddButton from "../ListAndCardAddButton";
 
 type Tasks = {
     id: string;
@@ -34,7 +31,7 @@ export default function TaskList({ tasks }: Props) {
                 <Typography.Text className="task-title">
                     {tasks.title}
                 </Typography.Text>
-                <Image width={20} src={moreIcon} alt="more" />
+                <TaskListColDropdown />
             </div>
             {/* <div
                 className="task-droppable-zone"

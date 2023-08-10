@@ -18,8 +18,6 @@ type Props = {};
 export default function Navbar({}: Props) {
     const navigationParams = useParams();
 
-    console.log(navigationParams);
-
     return (
         <div className="navbar">
             <div className="logo-wrapper">
