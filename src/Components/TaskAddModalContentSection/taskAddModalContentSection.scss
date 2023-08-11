@@ -1,0 +1,27 @@
+.task-add-modal-content-section {
+    .section-header {
+        .title {
+            color: #000;
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .task-list-info {
+            color: #bdbdbd;
+            font-size: 12px;
+            font-weight: 600;
+
+            .task-list-name {
+                margin-left: 5px;
+                color: #333;
+                font-size: 12px;
+                font-weight: 600;
+            }
+        }
+    }
+
+    .task-description-wrapper {
+        margin: 20px 0;
+    }
+}

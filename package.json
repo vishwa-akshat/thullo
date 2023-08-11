@@ -25,6 +25,7 @@
         "zustand": "^4.3.9"
     },
     "devDependencies": {
-        "@types/uniqid": "^5.3.2"
+        "@types/uniqid": "^5.3.2",
+        "react-quill": "^2.0.0"
     }
 }
