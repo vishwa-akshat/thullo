@@ -2,7 +2,7 @@
 import React from "react";
 import { Modal, Input } from "antd";
 
-import useTasksListAddModalStore from "@src/store/TasksListAddModalState";
+import useTasksListAddModalStore from "@src/store/tasksListAddModalState";
 
 import "./tasksListAddModal.scss";
 

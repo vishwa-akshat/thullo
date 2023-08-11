@@ -5,6 +5,8 @@ import TaskCard from "@src/Components/TaskCard";
 import ListAndCardAddButton from "@src/Components/ListAndCardAddButton";
 import TaskListColDropdown from "@src/Components/TaskListColDropdown";
 
+import useTaskAddModalStore from "@src/store/taskAddModalState";
+
 import "./taskList.scss";
 
 type Tasks = {
@@ -25,6 +27,10 @@ type Props = {
 };
 
 export default function TaskList({ tasks }: Props) {
+    const showTaskAddModal = useTaskAddModalStore(
+        (state) => state.showTaskAddModal
+    );
+
     return (
         <div className="task-list">
             <div className="task-list-header">
@@ -44,7 +50,7 @@ export default function TaskList({ tasks }: Props) {
                     ))
                 )}
             </div> */}
-            <ListAndCardAddButton onClickHandler={() => null}>
+            <ListAndCardAddButton onClickHandler={showTaskAddModal}>
                 {tasks?.tasksList?.length === 0
                     ? "Add your card"
                     : "Add another card"}

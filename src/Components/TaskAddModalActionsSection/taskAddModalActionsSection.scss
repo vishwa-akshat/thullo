@@ -1,0 +1,25 @@
+.task-add-actions-section {
+    .actions-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .header-icon {
+        }
+        .header-text {
+            color: #bdbdbd;
+            font-size: 14px;
+            font-weight: 500;
+        }
+    }
+
+    .actions-buttons-wrapper {
+        display: flex;
+        flex-direction: column;
+        margin-top: 14px;
+        gap: 12px;
+        .ghost-button {
+            width: 100%;
+        }
+    }
+}

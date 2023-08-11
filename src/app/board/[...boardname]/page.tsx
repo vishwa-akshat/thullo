@@ -4,6 +4,7 @@ import React from "react";
 
 import BoardHeader from "@src/Components/BoardHeader";
 import BoardWorkspace from "@src/Components/BoardWorkspace";
+import TaskAddModal from "@src/Components/TaskAddModal";
 
 import "./board.scss";
 
@@ -18,6 +19,7 @@ export default function Board({}: Props) {
             <div className="board-workspace-wrapper">
                 <BoardWorkspace />
             </div>
+            <TaskAddModal />
         </div>
     );
 }

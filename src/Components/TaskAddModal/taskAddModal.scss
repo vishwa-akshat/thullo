@@ -1,0 +1,31 @@
+.task-add-modal {
+    width: 660px !important;
+
+    .task-cover {
+        max-width: 100% !important;
+        object-fit: cover;
+        border-radius: 12px;
+    }
+
+    .task-add-modal-body {
+        display: grid;
+        grid-template-columns: 442px 150px;
+        gap: 24px;
+        margin-top: 25px;
+    }
+
+    .ant-modal-content {
+        border-radius: 12px;
+
+        .ant-modal-close {
+            background: #2f80ed;
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+
+            svg {
+                fill: #fff;
+            }
+        }
+    }
+}
