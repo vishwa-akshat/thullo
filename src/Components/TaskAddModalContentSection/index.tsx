@@ -1,6 +1,7 @@
 import React from "react";
 
 import TaskDescription from "@src/Components/TaskDescription";
+import TaskAttachment from "@src/Components/TaskAttachment";
 
 import "./taskAddModalContentSection.scss";
 
@@ -19,6 +20,9 @@ export default function TaskAddModalContentSection({}: Props) {
             </div>
             <div className="task-description-wrapper">
                 <TaskDescription />
+            </div>
+            <div className="task-attachment-wrapper">
+                <TaskAttachment />
             </div>
         </div>
     );

@@ -9,6 +9,7 @@ import descriptionIcon from "@src/assets/description.svg";
 import editIcon from "@src/assets/edit.svg";
 
 import "./taskDescription.scss";
+import TasksAddModalSectionsHeader from "../TasksAddModalSectionsHeader";
 
 type Props = {};
 
@@ -22,23 +23,11 @@ export default function TaskDescription({}: Props) {
 
     return (
         <div className="task-add-modal-description">
-            <div className="task-description-header">
-                <div className="title-wrapper">
-                    <Image
-                        width={14}
-                        height={14}
-                        src={descriptionIcon}
-                        alt="description"
-                    />
-                    <p className="title">Description</p>
-                </div>
-                <OutlinedButton
-                    icon={editIcon}
-                    onClickHandler={handleDescriptionEditButtonClick}
-                >
-                    Edit
-                </OutlinedButton>
-            </div>
+            <TasksAddModalSectionsHeader
+                btnText="Edit"
+                title="Description"
+                icon={editIcon}
+            />
             {isEdit ? (
                 <ReactQuill theme="snow" value={value} onChange={setValue} />
             ) : (
