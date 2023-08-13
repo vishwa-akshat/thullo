@@ -1,9 +1,11 @@
 import React from "react";
 
+import TasksAddModalSectionsHeader from "@src/Components/TasksAddModalSectionsHeader";
+import TaskAttachmentsViewList from "@src/Components/TaskAttachmentsViewList";
+
 import plusIcon from "@src/assets/addGrey.svg";
 
 import "./taskAttachment.scss";
-import TasksAddModalSectionsHeader from "../TasksAddModalSectionsHeader";
 
 type Props = {};
 
@@ -18,7 +20,7 @@ export default function TaskAttachment({}: Props) {
                 iconHeight={18}
             />
             <div className="attachment-content-wrapper">
-                TasksAddModalSectionsHeader
+                <TaskAttachmentsViewList />
             </div>
         </div>
     );
