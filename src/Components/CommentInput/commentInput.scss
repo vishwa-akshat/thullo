@@ -1,0 +1,31 @@
+.comment-input-wrapper {
+    padding: 12px;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+
+    .comment-input {
+        display: flex;
+        gap: 15px;
+
+        .comment-textarea {
+            border: none !important;
+            box-shadow: none !important;
+        }
+    }
+
+    .comment-btn-wrapper {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 10px;
+
+        .comment-btn {
+            height: 30px;
+            border-radius: 10px;
+            background: #2f80ed;
+            color: #fff;
+            font-size: 12px;
+        }
+    }
+}
