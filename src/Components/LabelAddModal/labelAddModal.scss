@@ -1,0 +1,43 @@
+.label-add-modal {
+    width: 250px !important;
+
+    .ant-modal-content {
+        padding: 12px;
+    }
+
+    .label-add-modal-header {
+        .title {
+            color: #4f4f4f;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .info {
+            color: #828282;
+            font-size: 14px;
+        }
+    }
+
+    .task-label-input {
+        margin: 15px 0;
+    }
+
+    .available-tags-wrapper {
+        margin: 20px 0;
+        .available-tags-heading {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+
+            .heading {
+                color: #bdbdbd;
+                font-size: 12px;
+                font-weight: 600;
+            }
+        }
+
+        .labels-list {
+            margin: 10px 0;
+        }
+    }
+}

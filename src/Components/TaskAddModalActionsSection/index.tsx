@@ -1,36 +1,47 @@
 import React from "react";
 import Image from "next/image";
 
-import accountIcon from "@src/assets/accountUser.svg";
+import GhostButton from "../GhostButton";
 
+import LabelAddModal from "@src/Components/LabelAddModal";
+
+import useLabelAddModalStore from "@src/store/labelAddModalState";
+
+import accountIcon from "@src/assets/accountUser.svg";
 import groupIcon from "@src/assets/group.svg";
 import labelIcon from "@src/assets/label.svg";
 import imageIcon from "@src/assets/image.svg";
 
 import "./taskAddModalActionsSection.scss";
-import GhostButton from "../GhostButton";
 
 type Props = {};
 
-const buttonsArr = [
-    {
-        id: "1",
-        name: "Members",
-        icon: groupIcon,
-    },
-    {
-        id: "2",
-        name: "Labels",
-        icon: labelIcon,
-    },
-    {
-        id: "3",
-        name: "Cover",
-        icon: imageIcon,
-    },
-];
-
 export default function TaskAddModalActionsSection({}: Props) {
+    const showLabelAddModal = useLabelAddModalStore(
+        (state) => state.showLabelAddModal
+    );
+
+    const buttonsArr = [
+        {
+            id: "1",
+            name: "Members",
+            icon: groupIcon,
+            action: null,
+        },
+        {
+            id: "2",
+            name: "Labels",
+            icon: labelIcon,
+            action: showLabelAddModal,
+        },
+        {
+            id: "3",
+            name: "Cover",
+            icon: imageIcon,
+            action: null,
+        },
+    ];
+
     return (
         <div className="task-add-actions-section">
             <div className="actions-header">
@@ -48,12 +59,15 @@ export default function TaskAddModalActionsSection({}: Props) {
                     <GhostButton
                         key={button.id}
                         icon={button.icon}
-                        onClickHandler={() => null}
+                        onClickHandler={() =>
+                            button.action ? button.action() : null
+                        }
                     >
                         {button.name}
                     </GhostButton>
                 ))}
             </div>
+            <LabelAddModal />
         </div>
     );
 }
