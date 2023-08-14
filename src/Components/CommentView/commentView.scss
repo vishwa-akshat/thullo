@@ -1,0 +1,46 @@
+.comment-view {
+    .comment {
+        color: hsl(0, 0%, 31%);
+        font-size: 15px;
+    }
+
+    .comment-view-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .comment-profile-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            .profile-info {
+                .name {
+                    color: #000;
+                    font-size: 12px;
+                    font-weight: 500;
+                }
+
+                .date {
+                    color: #bdbdbd;
+                    font-size: 11px;
+                }
+            }
+        }
+
+        .comment-actions-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+
+            .comment-action {
+                color: #828282;
+                font-size: 11px;
+            }
+
+            .dash {
+                color: #828282;
+            }
+        }
+    }
+}
