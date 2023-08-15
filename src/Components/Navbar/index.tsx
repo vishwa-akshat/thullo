@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { Divider } from "antd";
 
 import ProfileInfo from "@src/Components/ProfileInfo";
@@ -17,6 +17,12 @@ type Props = {};
 
 export default function Navbar({}: Props) {
     const navigationParams = useParams();
+    const pathname = usePathname();
+    const isLoginPage = pathname === "/login";
+
+    if (isLoginPage) {
+        return <></>;
+    }
 
     return (
         <div className="navbar">
