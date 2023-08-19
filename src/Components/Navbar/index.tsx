@@ -19,8 +19,9 @@ export default function Navbar({}: Props) {
     const navigationParams = useParams();
     const pathname = usePathname();
     const isLoginPage = pathname === "/login";
+    const isSignUpPage = pathname === "/sign-up";
 
-    if (isLoginPage) {
+    if (isLoginPage || isSignUpPage) {
         return <></>;
     }
 

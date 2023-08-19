@@ -9,6 +9,7 @@ import lockIcon from "@src/assets/lock.svg";
 
 import "./login.scss";
 import SocialButtonsList from "@src/Components/SocialButtonsList";
+import Link from "next/link";
 
 type Props = {};
 
@@ -50,6 +51,10 @@ export default function Login({}: Props) {
                         or continue with these social profile
                     </p>
                     <SocialButtonsList />
+                </div>
+                <div className="register-page-route-text">
+                    Don’t have an account yet?{" "}
+                    <Link href="/sign-up">Register</Link>
                 </div>
             </div>
         </section>
