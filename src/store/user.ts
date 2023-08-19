@@ -1,11 +1,15 @@
 import { create } from "zustand";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+} from "firebase/auth";
 
 import { auth } from "@src/firebase/config";
 
 interface UserState {
     user: any;
     registerUser: (email: string, password: string) => void;
+    loginUser: (email: string, password: string) => void;
 }
 
 const useUserStore = create<UserState>((set) => ({
@@ -13,6 +17,18 @@ const useUserStore = create<UserState>((set) => ({
     registerUser: async (email, password) => {
         try {
             const response = await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+            set({ user: response.user });
+        } catch (err) {
+            console.error(err);
+        }
+    },
+    loginUser: async (email, password) => {
+        try {
+            const response = await signInWithEmailAndPassword(
                 auth,
                 email,
                 password
