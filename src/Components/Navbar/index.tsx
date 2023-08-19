@@ -18,8 +18,8 @@ type Props = {};
 export default function Navbar({}: Props) {
     const navigationParams = useParams();
     const pathname = usePathname();
-    const isLoginPage = pathname === "/login";
-    const isSignUpPage = pathname === "/sign-up";
+    const isLoginPage = pathname === "/auth/login";
+    const isSignUpPage = pathname === "/auth/sign-up";
 
     if (isLoginPage || isSignUpPage) {
         return <></>;

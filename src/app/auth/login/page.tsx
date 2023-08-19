@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { Button, Input } from "antd";
 
@@ -7,22 +8,28 @@ import logo from "@src/assets/Logo.svg";
 import mailIcon from "@src/assets/mail.svg";
 import lockIcon from "@src/assets/lock.svg";
 
-import "./signUp.scss";
 import SocialButtonsList from "@src/Components/SocialButtonsList";
-import Link from "next/link";
+
+import "./login.scss";
+import { redirect } from "next/navigation";
+import useUserStore from "@src/store/user";
 
 type Props = {};
 
-export default function SignUp({}: Props) {
+export default function Login({}: Props) {
+    const user = useUserStore((state) => state.user);
+
+    React.useEffect(() => {
+        if (user) {
+            redirect("/");
+        }
+    }, [user]);
+
     return (
-        <section className="auth-page-container">
-            <div className="auth-card">
+        <section className="login-page-container">
+            <div className="login-card">
                 <Image src={logo} alt="logo" />
-                <h1 className="heading">Welcome to Your Kanban Board</h1>
-                <p className="sub-heading">
-                    Join Our Productivity Platform to Organize Your Tasks
-                    Effectively
-                </p>
+                <h1 className="heading">Login</h1>
                 <Input
                     className="user-creds-input"
                     placeholder="Email"
@@ -47,8 +54,8 @@ export default function SignUp({}: Props) {
                         />
                     }
                 />
-                <Button className="auth-btn" type="primary" block>
-                    Register
+                <Button className="login-btn" type="primary" block>
+                    Login
                 </Button>
                 <div className="social-profile-wrapper">
                     <p className="social-profile-icons-heading">
@@ -56,8 +63,9 @@ export default function SignUp({}: Props) {
                     </p>
                     <SocialButtonsList />
                 </div>
-                <div className="login-page-route-text">
-                    Already a member? <Link href="/login">Login</Link>
+                <div className="register-page-route-text">
+                    Don’t have an account yet?{" "}
+                    <Link href="/auth/sign-up">Register</Link>
                 </div>
             </div>
         </section>
