@@ -6,11 +6,21 @@ import Image from "next/image";
 type Props = {
     icon: SVGImageElement;
     name: string;
+    isDisable: boolean;
+    onClickHandler: () => void;
 };
 
-export default function SocialButton({ icon, name }: Props) {
+export default function SocialButton({
+    isDisable,
+    onClickHandler,
+    icon,
+    name,
+}: Props) {
     return (
-        <div className="social-button">
+        <div
+            className={`${isDisable && "social-btn-disable"} social-button`}
+            onClick={onClickHandler}
+        >
             <Image
                 className="social-icon"
                 src={icon}

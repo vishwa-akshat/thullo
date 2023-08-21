@@ -25,7 +25,7 @@ export default function ProfileInfo({}: Props) {
 
     return (
         <div className="profile-info-wrapper">
-            {user.photoUrl ? <Avatar /> : null}
+            {user.photoURL !== null ? <Avatar src={user.photoURL} /> : null}
 
             <Text className="name">
                 {user.displayName ? user.displayName : user.email}
