@@ -4,9 +4,9 @@ import Image from "next/image";
 import { useParams, usePathname } from "next/navigation";
 import { Divider } from "antd";
 
-import ProfileInfo from "@src/Components/ProfileInfo";
 import SearchBar from "@src/Components/SearchBar";
 import GhostButton from "@src/Components/GhostButton";
+import NavMenuDropDown from "@src/Components/NavMenuDropdown";
 
 import Logo from "@src/assets/Logo.svg";
 import appLogo from "@src/assets/apps.svg";
@@ -41,7 +41,7 @@ export default function Navbar({}: Props) {
             )}
             <div className="navbar-options">
                 <SearchBar />
-                <ProfileInfo />
+                <NavMenuDropDown />
             </div>
         </div>
     );

@@ -2,6 +2,7 @@ import { create } from "zustand";
 import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
+    signOut,
 } from "firebase/auth";
 
 import { auth } from "@src/firebase/config";
@@ -10,6 +11,7 @@ interface UserState {
     user: any;
     registerUser: (email: string, password: string) => void;
     loginUser: (email: string, password: string) => void;
+    logoutUser: () => void;
 }
 
 const useUserStore = create<UserState>((set) => ({
@@ -21,7 +23,7 @@ const useUserStore = create<UserState>((set) => ({
                 email,
                 password
             );
-            set({ user: response.user });
+            set({ user: response.user.providerData[0] });
         } catch (err) {
             console.error(err);
         }
@@ -33,7 +35,15 @@ const useUserStore = create<UserState>((set) => ({
                 email,
                 password
             );
-            set({ user: response.user });
+            set({ user: response.user.providerData[0] });
+        } catch (err) {
+            console.error(err);
+        }
+    },
+    logoutUser: async () => {
+        try {
+            await signOut(auth);
+            window.location.replace("/auth/login");
         } catch (err) {
             console.error(err);
         }

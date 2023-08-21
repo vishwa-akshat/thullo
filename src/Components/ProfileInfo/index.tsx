@@ -1,26 +1,35 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { Typography } from "antd";
 
 import Avatar from "@src/Components/Avatar";
 
 import ArrowDown from "@src/assets/Arrow-down.svg";
 
-import "./profileInfo.scss";
-import Image from "next/image";
+import useUserStore from "@src/store/user";
 
-type Props = {
-    name?: string;
-};
+import "./profileInfo.scss";
+
+type Props = {};
 
 const { Text } = Typography;
 
-export default function ProfileInfo({ name = "Xanthe Neal" }: Props) {
+export default function ProfileInfo({}: Props) {
+    const user = useUserStore((state) => state.user);
+
+    if (!user) {
+        return <></>;
+    }
+
     return (
         <div className="profile-info-wrapper">
-            <Avatar />
-            <Text className="name">{name}</Text>
+            {user.photoUrl ? <Avatar /> : null}
+
+            <Text className="name">
+                {user.displayName ? user.displayName : user.email}
+            </Text>
             <Image
                 className="arrow-down-icon"
                 src={ArrowDown}
