@@ -6,6 +6,7 @@ import TasksListAddModal from "@src/Components/TasksListAddModal";
 
 import useTaskStore from "@src/store/taskStore";
 import useTasksListAddModalStore from "@src/store/tasksListAddModalState";
+import useBoardStore from "@src/store/boardStore";
 
 import "./boardWorkspace.scss";
 
@@ -16,12 +17,12 @@ export default function BoardWorkspace({}: Props) {
         (state) => state.showTasksListAddModal
     );
 
-    const tasksList = useTaskStore((state) => state.tasksList);
+    const currentBoard = useBoardStore((state) => state.currentBoard);
 
     return (
         <div className="board-workspace">
-            {tasksList.map((col: any) => (
-                <TaskList key={col.id} tasks={col} />
+            {currentBoard?.columns?.map((col: any) => (
+                <TaskList tasks={col} />
             ))}
             <ListAndCardAddButton onClickHandler={showTasksListAddModal}>
                 Add another list

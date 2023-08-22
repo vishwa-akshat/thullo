@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 
 import AvatarList from "@src/Components/AvatarList";
 
+import useBoardStore from "@src/store/boardStore";
+
 import "./boardCard.scss";
 
 type CardData = {
@@ -36,8 +38,13 @@ const members = [
 export default function BoardCard({ cardData: { cover, title } }: Props) {
     const router = useRouter();
 
+    const setCurrentBoard = useBoardStore((state) => state.setCurrentBoard);
+    const boards = useBoardStore((state) => state.boards);
+
     const handleBoardCardClick = () => {
         router.push(`/board/${title}`);
+        const requiredBoard = boards.filter((board) => board.title === title);
+        setCurrentBoard(requiredBoard[0]);
     };
 
     return (

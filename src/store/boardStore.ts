@@ -10,10 +10,12 @@ interface BoardState {
     boards: any[];
     visibilityOfBoard: string;
     coverOfBoard: string;
+    currentBoard: any;
     setBoard: (boardInfo: Board) => void;
     setVisibilityOfBoard: (option: string) => void;
     setCoverOfBoard: (coverUrl: string) => void;
     fetchBoardData: () => void;
+    setCurrentBoard: (value: any) => void;
 }
 interface Board {
     columns: [];
@@ -28,6 +30,10 @@ const DEFAULT_COVER =
 
 const useBoardStore = create<BoardState>((set, get) => ({
     boards: [],
+    currentBoard: null,
+    setCurrentBoard: (value) => {
+        set({ currentBoard: value });
+    },
     visibilityOfBoard: "Public",
     coverOfBoard: DEFAULT_COVER,
     setBoard: async (boardInfo: Board) => {
@@ -58,7 +64,10 @@ const useBoardStore = create<BoardState>((set, get) => ({
             );
             set({
                 boards: [
-                    ...querySnapshot.docs.map((doc) => ({ ...doc.data() })),
+                    ...querySnapshot.docs.map((doc) => ({
+                        ...doc.data(),
+                        firebaseDocId: doc.id,
+                    })),
                 ],
             });
         } catch (e) {
