@@ -17,8 +17,6 @@ export default function Avatar({ name = "Jon Doe", src, size = 32 }: Props) {
     const firstName = nameArr[0];
     const lastName = nameArr[1];
 
-    console.log(src);
-
     return (
         <div className="avatar-wrapper">
             {src ? (
