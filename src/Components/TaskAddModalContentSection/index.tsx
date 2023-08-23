@@ -26,7 +26,7 @@ export default function TaskAddModalContentSection({}: Props) {
                     <TaskTitleAdd setIsTitleEditing={setIsTitleEditing} />
                 ) : (
                     <div className="title-wrapper">
-                        <p className="title"></p>
+                        <p className="title">
                             {title !== "" ? title : "Please Enter Your Title"}
                         </p>
                         <OutlinedButton
