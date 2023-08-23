@@ -25,6 +25,7 @@ export default function TaskDescription({}: Props) {
                 btnText="Edit"
                 title="Description"
                 icon={editIcon}
+                onClickHandler={handleDescriptionEditButtonClick}
             />
             {isEdit ? (
                 <ReactQuill theme="snow" value={value} onChange={setValue} />

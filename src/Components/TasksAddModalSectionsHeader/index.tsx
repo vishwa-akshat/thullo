@@ -13,6 +13,7 @@ type Props = {
     btnText: string;
     iconWidth?: number;
     iconHeight?: number;
+    onClickHandler: () => void;
 };
 
 export default function TasksAddModalSectionsHeader({
@@ -21,6 +22,7 @@ export default function TasksAddModalSectionsHeader({
     btnText,
     iconWidth,
     iconHeight,
+    onClickHandler,
 }: Props) {
     return (
         <div className="task-add-modal-sections-header">
@@ -37,7 +39,7 @@ export default function TasksAddModalSectionsHeader({
                 width={iconWidth && iconWidth}
                 height={iconHeight && iconHeight}
                 icon={icon}
-                onClickHandler={() => null}
+                onClickHandler={onClickHandler}
             >
                 {btnText}
             </OutlinedButton>
