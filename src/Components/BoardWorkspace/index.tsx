@@ -6,7 +6,6 @@ import TaskList from "@src/Components/TaskList";
 import ListAndCardAddButton from "@src/Components/ListAndCardAddButton";
 import TasksListAddModal from "@src/Components/TasksListAddModal";
 
-import useTaskStore from "@src/store/taskStore";
 import useTasksListAddModalStore from "@src/store/tasksListAddModalState";
 import useBoardStore from "@src/store/boardStore";
 

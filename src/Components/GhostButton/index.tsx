@@ -31,7 +31,7 @@ export default function GhostButton({ children, icon, onClickHandler }: Props) {
     }
 
     return (
-        <AntButton className="button" type="primary">
+        <AntButton className="ghost-button" type="primary">
             {children}
         </AntButton>
     );

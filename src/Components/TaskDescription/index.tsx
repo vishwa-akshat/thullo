@@ -1,15 +1,13 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from "react";
-import Image from "next/image";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-import OutlinedButton from "@src/Components/OutlinedButton";
+import TasksAddModalSectionsHeader from "@src/Components/TasksAddModalSectionsHeader";
 
-import descriptionIcon from "@src/assets/description.svg";
 import editIcon from "@src/assets/edit.svg";
 
 import "./taskDescription.scss";
-import TasksAddModalSectionsHeader from "../TasksAddModalSectionsHeader";
 
 type Props = {};
 

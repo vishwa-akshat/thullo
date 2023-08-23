@@ -13,7 +13,7 @@ interface TaskState {
     removeTaskList: (id: string) => void;
 }
 
-const useTaskStore = create<TaskState>((set, get) => ({
+const useTaskListStore = create<TaskState>((set, get) => ({
     tasksList: [],
     addTaskList: async (title) => {
         try {
@@ -39,4 +39,4 @@ const useTaskStore = create<TaskState>((set, get) => ({
     },
 }));
 
-export default useTaskStore;
+export default useTaskListStore;

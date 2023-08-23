@@ -1,10 +1,16 @@
 .task-add-modal-content-section {
     .section-header {
-        .title {
-            color: #000;
-            font-size: 16px;
-            font-weight: 500;
-            margin-bottom: 5px;
+        .title-wrapper {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+
+            .title {
+                color: #000;
+                font-size: 16px;
+                font-weight: 500;
+                margin-bottom: 5px;
+            }
         }
 
         .task-list-info {

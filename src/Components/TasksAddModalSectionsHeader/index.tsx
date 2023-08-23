@@ -11,8 +11,8 @@ type Props = {
     icon: SVGElement;
     title: string;
     btnText: string;
-    iconWidth: number;
-    iconHeight: number;
+    iconWidth?: number;
+    iconHeight?: number;
 };
 
 export default function TasksAddModalSectionsHeader({

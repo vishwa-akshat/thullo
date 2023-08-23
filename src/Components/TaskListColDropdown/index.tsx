@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Dropdown } from "antd";
 import type { MenuProps } from "antd";
 
-import useTaskStore from "@src/store/taskStore";
+import useTaskListStore from "@src/store/taskListStore";
 
 import moreIcon from "@src/assets/more.svg";
 
@@ -15,7 +15,7 @@ type Props = {
 };
 
 export default function TaskListColDropdown({ id }: Props) {
-    const removeTaskList = useTaskStore((state) => state.removeTaskList);
+    const removeTaskList = useTaskListStore((state) => state.removeTaskList);
 
     const items: MenuProps["items"] = [
         {

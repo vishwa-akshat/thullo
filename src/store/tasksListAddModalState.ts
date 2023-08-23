@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-import useTaskStore from "./taskStore";
+import useTaskListStore from "./taskListStore";
 
 interface TasksListModalAddState {
     isTasksListAddModalOpen: boolean;
@@ -15,7 +15,7 @@ const useTasksListAddModalStore = create<TasksListModalAddState>((set) => ({
         set({ isTasksListAddModalOpen: true });
     },
     tasksListAddModalHandleOk: (title) => {
-        useTaskStore.getState().addTaskList(title);
+        useTaskListStore.getState().addTaskList(title);
         set({ isTasksListAddModalOpen: false });
     },
     tasksListAddModalHandleCancel: () => {
