@@ -1,11 +1,14 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from "react";
 import ReactQuill from "react-quill";
+import { Button } from "antd";
 import "react-quill/dist/quill.snow.css";
 
 import TasksAddModalSectionsHeader from "@src/Components/TasksAddModalSectionsHeader";
 
 import editIcon from "@src/assets/edit.svg";
+
+import useTaskAddStore from "@src/store/taskAddStore";
 
 import "./taskDescription.scss";
 
@@ -15,8 +18,16 @@ export default function TaskDescription({}: Props) {
     const [value, setValue] = React.useState("");
     const [isEdit, setIsEdit] = React.useState(false);
 
+    const setDescription = useTaskAddStore((state) => state.setDescription);
+    const description = useTaskAddStore((state) => state.description);
+
     const handleDescriptionEditButtonClick = () => {
-        setIsEdit(!isEdit);
+        setIsEdit(true);
+    };
+
+    const handleDescriptionSubmit = () => {
+        setDescription(value);
+        setIsEdit(false);
     };
 
     return (
@@ -26,19 +37,37 @@ export default function TaskDescription({}: Props) {
                 title="Description"
                 icon={editIcon}
                 onClickHandler={handleDescriptionEditButtonClick}
+                isButtonHid={isEdit}
             />
             {isEdit ? (
-                <ReactQuill theme="snow" value={value} onChange={setValue} />
+                <>
+                    <ReactQuill
+                        theme="snow"
+                        value={value}
+                        onChange={setValue}
+                    />
+                    <div className="btn-wrapper">
+                        <Button
+                            htmlType="submit"
+                            type="primary"
+                            onClick={handleDescriptionSubmit}
+                        >
+                            Confirm
+                        </Button>
+                        <Button danger onClick={() => setIsEdit(false)}>
+                            Cancel
+                        </Button>
+                    </div>
+                </>
             ) : (
                 <p className="description">
-                    Ideas are created and share here through a card. Here you
-                    can describe what you'd like to accomplish. For example you
-                    can follow three simple questions to create the card related
-                    to your idea: * Why ? (Why do you wish to do it ?) * What ?
-                    (What it is it, what are the goals, who is concerned) * How
-                    ? (How do you think you can do it ? What are the required
-                    steps ?) After creation, you can move your card to the todo
-                    list.
+                    {description !== "" ? (
+                        <p
+                            dangerouslySetInnerHTML={{ __html: description }}
+                        ></p>
+                    ) : (
+                        "Please enter a description"
+                    )}
                 </p>
             )}
         </div>

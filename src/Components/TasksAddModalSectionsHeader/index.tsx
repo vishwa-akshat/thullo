@@ -13,6 +13,7 @@ type Props = {
     btnText: string;
     iconWidth?: number;
     iconHeight?: number;
+    isButtonHid?: Boolean;
     onClickHandler: () => void;
 };
 
@@ -23,6 +24,7 @@ export default function TasksAddModalSectionsHeader({
     iconWidth,
     iconHeight,
     onClickHandler,
+    isButtonHid,
 }: Props) {
     return (
         <div className="task-add-modal-sections-header">
@@ -35,14 +37,16 @@ export default function TasksAddModalSectionsHeader({
                 />
                 <p className="title">{title}</p>
             </div>
-            <OutlinedButton
-                width={iconWidth && iconWidth}
-                height={iconHeight && iconHeight}
-                icon={icon}
-                onClickHandler={onClickHandler}
-            >
-                {btnText}
-            </OutlinedButton>
+            {!isButtonHid && (
+                <OutlinedButton
+                    width={iconWidth && iconWidth}
+                    height={iconHeight && iconHeight}
+                    icon={icon}
+                    onClickHandler={onClickHandler}
+                >
+                    {btnText}
+                </OutlinedButton>
+            )}
         </div>
     );
 }
