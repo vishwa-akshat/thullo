@@ -20,6 +20,7 @@ export default function Navbar({}: Props) {
     const pathname = usePathname();
     const isLoginPage = pathname === "/auth/login";
     const isSignUpPage = pathname === "/auth/sign-up";
+    const boardName = navigationParams?.boardname?.replaceAll("%20", " ");
 
     if (isLoginPage || isSignUpPage) {
         return <></>;
@@ -32,7 +33,7 @@ export default function Navbar({}: Props) {
             </div>
             {Object.keys(navigationParams).length !== 0 && (
                 <div className="board-nav-info">
-                    <p>{`${navigationParams.boardname}`}</p>
+                    <p>{boardName}</p>
                     <Divider type="vertical" />
                     <GhostButton icon={appLogo} onClickHandler={() => null}>
                         All board

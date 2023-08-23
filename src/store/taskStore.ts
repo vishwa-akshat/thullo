@@ -11,7 +11,6 @@ interface TaskState {
     tasksList: any;
     addTaskList: (title: string) => void;
     removeTaskList: (id: string) => void;
-    setCurrentBoardAfterTaskListUpdate: (id: string) => void;
 }
 
 const useTaskStore = create<TaskState>((set, get) => ({
@@ -24,22 +23,13 @@ const useTaskStore = create<TaskState>((set, get) => ({
             await updateDoc(
                 doc(db, `users/${userId}/boards`, currentBoard.firebaseDocId),
                 {
-                    columns: arrayUnion({ title }),
+                    columns: arrayUnion({ title, id: uniqid() }),
                 }
             );
             useBoardStore.getState().fetchBoardData();
-            get().setCurrentBoardAfterTaskListUpdate(
-                currentBoard.firebaseDocId
-            );
         } catch (err) {
             console.error(err);
         }
-    },
-    setCurrentBoardAfterTaskListUpdate: async (id) => {
-        const reqBoard = useBoardStore
-            .getState()
-            .boards.filter((board) => board.firebaseDocId === id);
-        useBoardStore.getState().setCurrentBoard(reqBoard[0]);
     },
     removeTaskList: (id) => {
         let updatedTaskList = get().tasksList.filter(
