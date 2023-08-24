@@ -61,12 +61,13 @@ export default function TaskDescription({}: Props) {
                 </>
             ) : (
                 <p className="description">
-                    {description !== "" ? (
+                    {description === "" ||
+                    description.includes("<p><br></p>") ? (
+                        "Please enter a description"
+                    ) : (
                         <p
                             dangerouslySetInnerHTML={{ __html: description }}
                         ></p>
-                    ) : (
-                        "Please enter a description"
                     )}
                 </p>
             )}

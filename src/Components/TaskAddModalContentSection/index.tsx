@@ -44,9 +44,9 @@ export default function TaskAddModalContentSection({}: Props) {
             <div className="task-description-wrapper">
                 <TaskDescription />
             </div>
-            <div className="task-attachment-wrapper">
+            {/* <div className="task-attachment-wrapper">
                 <TaskAttachment />
-            </div>
+            </div> */}
             <div className="comments-section-wrapper">
                 <TaskAddModalCommentsSection />
             </div>
