@@ -35,9 +35,9 @@ const useTasksStore = create<TasksState>((set, get) => ({
                 ...get().tasksArray,
                 { taskListId, tasks: [...resolvedResponse] },
             ];
-            const filteredArr = responseArray.reduce((acc, current) => {
+            const filteredArr = responseArray.reduceRight((acc, current) => {
                 const x = acc.find(
-                    (item) => item.taskListId === current.taskListId
+                    (item: any) => item.taskListId === current.taskListId
                 );
                 if (!x) {
                     return acc.concat([current]);
@@ -45,6 +45,7 @@ const useTasksStore = create<TasksState>((set, get) => ({
                     return acc;
                 }
             }, []);
+
             set({ tasksArray: filteredArr });
         } catch (e) {
             console.error(e);

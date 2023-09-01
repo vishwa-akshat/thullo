@@ -46,7 +46,9 @@ const useTaskNameAddModalStore = create<TaskNameModalAddState>((set) => ({
                 cover: DEFAULT_COVER,
             });
             set({ isTaskNameAddModalOpen: false });
-            useTasksStore.getState().fetchTasksData(currentTaskList);
+            useTasksStore
+                .getState()
+                .fetchTasksData(currentTaskList.firebaseDocId);
         } catch (err) {
             console.error(err);
         }
