@@ -2,4 +2,5 @@
     display: grid;
     gap: 32px;
     grid-template-columns: repeat(5, 245px);
+    justify-content: start;
 }

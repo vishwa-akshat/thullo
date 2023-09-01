@@ -78,11 +78,13 @@ export default function TaskList({ tasks }: Props) {
                     ))
                 )}
             </div>
-            <ListAndCardAddButton onClickHandler={handleBtnClick}>
-                {tasks?.tasksList?.length === 0
-                    ? "Add your card"
-                    : "Add another card"}
-            </ListAndCardAddButton>
+            <div className="task-add-button-wrapper">
+                <ListAndCardAddButton onClickHandler={handleBtnClick}>
+                    {tasks?.tasksList?.length === 0
+                        ? "Add your card"
+                        : "Add another card"}
+                </ListAndCardAddButton>
+            </div>
         </div>
     );
 }
