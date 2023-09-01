@@ -43,7 +43,6 @@ const useBoardStore = create<BoardState>((set, get) => ({
                 collection(db, `users/${userId}/boards`),
                 {
                     title: boardInfo.title,
-                    columns: [],
                     cover: boardInfo.cover,
                     visibility: boardInfo.visibility,
                     id: uniqid(),

@@ -9,9 +9,13 @@
         display: flex;
         gap: 15px;
 
-        .comment-textarea {
-            border: none !important;
-            box-shadow: none !important;
+        .comment-textarea-wrapper {
+            width: 100%;
+            margin-bottom: 0 !important;
+            .comment-textarea {
+                border: none !important;
+                box-shadow: none !important;
+            }
         }
     }
 

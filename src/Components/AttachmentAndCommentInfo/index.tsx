@@ -8,8 +8,8 @@ import attachIcon from "@src/assets/attach.svg";
 import "./attachmentAndCommentsInfo.scss";
 
 type Props = {
-    comments: number;
-    attachments: number;
+    comments: any;
+    attachments: any;
 };
 
 export default function AttachmentAndCommentInfo({
@@ -26,7 +26,7 @@ export default function AttachmentAndCommentInfo({
                     alt="comment icon"
                 />
                 <Typography.Text className="info-text">
-                    {comments}
+                    {comments?.length}
                 </Typography.Text>
             </div>
             <div className="info-wrapper">
@@ -37,7 +37,7 @@ export default function AttachmentAndCommentInfo({
                     alt="attachment icon"
                 />
                 <Typography.Text className="info-text">
-                    {attachments}
+                    {attachments?.length}
                 </Typography.Text>
             </div>
         </div>

@@ -9,6 +9,7 @@ import OutlinedButton from "../OutlinedButton";
 import editIcon from "@src/assets/edit.svg";
 
 import useTaskAddStore from "@src/store/taskAddStore";
+import useTaskListStore from "@src/store/taskListStore";
 
 import "./taskAddModalContentSection.scss";
 
@@ -18,6 +19,8 @@ export default function TaskAddModalContentSection({}: Props) {
     const [isTitleEditing, setIsTitleEditing] = React.useState(false);
 
     const title = useTaskAddStore((state) => state.title);
+
+    const taskListInfo = useTaskListStore((state) => state.currentTaskList);
 
     return (
         <div className="task-add-modal-content-section">
@@ -38,7 +41,8 @@ export default function TaskAddModalContentSection({}: Props) {
                     </div>
                 )}
                 <p className="task-list-info">
-                    in list <span className="task-list-name">In Progress</span>
+                    in list{" "}
+                    <span className="task-list-name">{taskListInfo.title}</span>
                 </p>
             </div>
             <div className="task-description-wrapper">

@@ -10,16 +10,16 @@ import "./taskCard.scss";
 import AttachmentAndCommentInfo from "../AttachmentAndCommentInfo";
 
 type Task = {
-    id: string;
-    image: string;
-    title: string;
-    tags: {
+    id?: string;
+    cover?: string;
+    title?: string;
+    labels: {
         name: string;
         color: string;
     }[];
-    attachments: number;
-    comments: number;
-    members: {
+    attachments?: any;
+    comments?: any;
+    members?: {
         name: string;
         avatar: string;
     }[];
@@ -30,10 +30,7 @@ type Props = {
     id: number;
 };
 
-export default function TaskCard({
-    taskData: { image, title, tags, members, comments, attachments },
-    id,
-}: Props) {
+export default function TaskCard({ taskData, id }: Props) {
     return (
         // <Draggable draggableId={id.toString()} index={id}>
         //     {(provided, snapshot) => (
@@ -43,24 +40,31 @@ export default function TaskCard({
             // {...provided.dragHandleProps}
             className="task-card"
         >
-            {image && (
+            {taskData?.cover && (
                 <Image
                     className="cover"
-                    src={image}
+                    src={taskData.cover}
                     alt="cover"
                     height={130}
                     width={220}
                 />
             )}
-            <Typography.Text className="title">{title}</Typography.Text>
-            <div className="tags-list-wrapper">
-                <TagsList tags={tags} />
-            </div>
+            <Typography.Text className="title">
+                {taskData?.title}
+            </Typography.Text>
+            {taskData.labels.length === 0 ? (
+                <></>
+            ) : (
+                <div className="tags-list-wrapper">
+                    <TagsList tags={taskData.labels} />
+                </div>
+            )}
+
             <div className="team-members-and-attachment-info">
-                <BoardTeamMember members={members} />
+                {/* <BoardTeamMember members={members} /> */}
                 <AttachmentAndCommentInfo
-                    comments={comments}
-                    attachments={attachments}
+                    comments={taskData?.comments}
+                    attachments={taskData?.attachments}
                 />
             </div>
         </div>

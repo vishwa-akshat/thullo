@@ -1,11 +1,14 @@
 "use client";
+import { useEffect, useState } from "react";
 import { Typography } from "antd";
 
 import TaskCard from "@src/Components/TaskCard";
 import ListAndCardAddButton from "@src/Components/ListAndCardAddButton";
 import TaskListColDropdown from "@src/Components/TaskListColDropdown";
 
-import useTaskAddModalStore from "@src/store/taskAddModalState";
+import useTaskNameAddModalStore from "@src/store/taskNameAddModalState";
+import useTaskListStore from "@src/store/taskListStore";
+import useTasksStore from "@src/store/tasksStore";
 
 import "./taskList.scss";
 
@@ -27,9 +30,36 @@ type Props = {
 };
 
 export default function TaskList({ tasks }: Props) {
-    const showTaskAddModal = useTaskAddModalStore(
-        (state) => state.showTaskAddModal
+    const [taskArr, setTasksArr] = useState([]);
+
+    const fetchTasksData = useTasksStore((state) => state.fetchTasksData);
+    const tasksArray = useTasksStore((state) => state.tasksArray);
+
+    useEffect(() => {
+        fetchTasksData(tasks?.firebaseDocId);
+    }, []);
+
+    useEffect(() => {
+        const reqArr = tasksArray.filter(
+            (task) => task.taskListId === tasks.firebaseDocId
+        );
+        if (reqArr.length > 0) {
+            setTasksArr(reqArr[0].tasks);
+        }
+    }, [tasksArray]);
+
+    const showTaskNameAddModal = useTaskNameAddModalStore(
+        (state) => state.showTaskNameAddModal
     );
+
+    const setActiveTaskList = useTaskListStore(
+        (state) => state.setCurrentTaskList
+    );
+
+    const handleBtnClick = () => {
+        setActiveTaskList(tasks);
+        showTaskNameAddModal();
+    };
 
     return (
         <div className="task-list">
@@ -39,18 +69,16 @@ export default function TaskList({ tasks }: Props) {
                 </Typography.Text>
                 <TaskListColDropdown id={tasks.id} />
             </div>
-            {/* <div
-                className="task-droppable-zone"
-            >
-                {tasks.length === 0 ? (
+            <div className="task-droppable-zone">
+                {taskArr.length === 0 ? (
                     <></>
                 ) : (
-                    tasks.map((task: Tasks, idx: number) => (
+                    taskArr.map((task: Tasks, idx: number) => (
                         <TaskCard id={idx} key={idx} taskData={task} />
                     ))
                 )}
-            </div> */}
-            <ListAndCardAddButton onClickHandler={showTaskAddModal}>
+            </div>
+            <ListAndCardAddButton onClickHandler={handleBtnClick}>
                 {tasks?.tasksList?.length === 0
                     ? "Add your card"
                     : "Add another card"}

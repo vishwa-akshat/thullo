@@ -1,6 +1,6 @@
 import uniqid from "uniqid";
 import { create } from "zustand";
-import { doc, getDocs, updateDoc, arrayUnion } from "firebase/firestore";
+import { collection, addDoc, getDocs } from "firebase/firestore";
 
 import { db } from "@src/firebase/config";
 
@@ -8,34 +8,54 @@ import useUserStore from "./user";
 import useBoardStore from "./boardStore";
 
 interface TaskState {
-    tasksList: any;
+    taskLists: any;
+    currentTaskList: any;
+    setCurrentTaskList: (taskList: any) => void;
     addTaskList: (title: string) => void;
-    removeTaskList: (id: string) => void;
+    fetchTaskListsData: () => void;
 }
 
 const useTaskListStore = create<TaskState>((set, get) => ({
-    tasksList: [],
+    taskLists: [],
+    currentTaskList: null,
+    setCurrentTaskList: (taskList) => {
+        set({ currentTaskList: taskList });
+    },
     addTaskList: async (title) => {
         try {
             const userId = useUserStore.getState().user?.uid;
             const currentBoard = useBoardStore.getState().currentBoard;
-
-            await updateDoc(
-                doc(db, `users/${userId}/boards`, currentBoard.firebaseDocId),
-                {
-                    columns: arrayUnion({ title, id: uniqid() }),
-                }
+            const docRef = collection(
+                db,
+                `users/${userId}/boards/${currentBoard.firebaseDocId}/columns`
             );
-            useBoardStore.getState().fetchBoardData();
+
+            await addDoc(docRef, { title, id: uniqid() });
+            get().fetchTaskListsData();
         } catch (err) {
             console.error(err);
         }
     },
-    removeTaskList: (id) => {
-        let updatedTaskList = get().tasksList.filter(
-            (task: { id: string }) => task.id !== id
-        );
-        set({ tasksList: updatedTaskList });
+    fetchTaskListsData: async () => {
+        try {
+            const userId = useUserStore.getState().user?.uid;
+            const currentBoard = useBoardStore.getState().currentBoard;
+            const docRef = collection(
+                db,
+                `users/${userId}/boards/${currentBoard.firebaseDocId}/columns`
+            );
+            const querySnapshot = await getDocs(docRef);
+            set({
+                taskLists: [
+                    ...querySnapshot.docs.map((doc) => ({
+                        ...doc.data(),
+                        firebaseDocId: doc.id,
+                    })),
+                ],
+            });
+        } catch (e) {
+            console.error(e);
+        }
     },
 }));
 
