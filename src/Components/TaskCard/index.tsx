@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { Typography } from "antd";
-// import { Draggable } from "react-beautiful-dnd";
+import { useDraggable } from "@dnd-kit/core";
 
 import TagsList from "@src/Components/TagsList";
 import AttachmentAndCommentInfo from "../AttachmentAndCommentInfo";
@@ -14,6 +14,7 @@ import useTaskAddStore from "@src/store/taskAddStore";
 import "./taskCard.scss";
 
 type Task = {
+    firebaseDocId?: string;
     id?: string;
     cover?: string;
     title?: string;
@@ -36,6 +37,15 @@ type Props = {
 };
 
 export default function TaskCard({ taskData, currentTasklist }: Props) {
+    const { attributes, listeners, setNodeRef, transform } = useDraggable({
+        id: `draggable-${taskData.id}`,
+        data: {
+            task: taskData,
+            taskListId: currentTasklist.firebaseDocId,
+            title: currentTasklist.title,
+        },
+    });
+
     const showTaskAddModal = useTaskAddModalStore(
         (state) => state.showTaskAddModal
     );
@@ -54,8 +64,21 @@ export default function TaskCard({ taskData, currentTasklist }: Props) {
         setActiveTaskEdit(taskData);
     };
 
+    const style = transform
+        ? {
+              transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+          }
+        : undefined;
+
     return (
-        <div className="task-card" onClick={handleCardClick}>
+        <div
+            className="task-card"
+            onClick={handleCardClick}
+            ref={setNodeRef}
+            style={style}
+            {...listeners}
+            {...attributes}
+        >
             {taskData?.cover && (
                 <Image
                     className="cover"

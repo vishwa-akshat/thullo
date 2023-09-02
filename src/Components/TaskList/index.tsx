@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Typography } from "antd";
+import { useDroppable } from "@dnd-kit/core";
 
 import TaskCard from "@src/Components/TaskCard";
 import ListAndCardAddButton from "@src/Components/ListAndCardAddButton";
@@ -32,6 +33,14 @@ type Props = {
 export default function TaskList({ tasks }: Props) {
     const [taskArr, setTasksArr] = useState([]);
 
+    const { isOver, setNodeRef } = useDroppable({
+        id: `droppable-${tasks.id}`,
+        data: {
+            taskListId: tasks.firebaseDocId,
+            title: tasks.title,
+        },
+    });
+
     const fetchTasksData = useTasksStore((state) => state.fetchTasksData);
     const tasksArray = useTasksStore((state) => state.tasksArray);
 
@@ -62,7 +71,7 @@ export default function TaskList({ tasks }: Props) {
     };
 
     return (
-        <div className="task-list">
+        <div className="task-list" ref={setNodeRef}>
             <div className="task-list-header">
                 <Typography.Text className="task-title">
                     {tasks.title}

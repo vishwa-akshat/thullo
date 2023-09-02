@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { useParams } from "next/navigation";
+import { DndContext } from "@dnd-kit/core";
 
 import TaskList from "@src/Components/TaskList";
 import ListAndCardAddButton from "@src/Components/ListAndCardAddButton";
@@ -10,6 +11,7 @@ import TaskNameAddModal from "@src/Components/TaskNameAddModal";
 import useTasksListAddModalStore from "@src/store/tasksListAddModalState";
 import useTaskListStore from "@src/store/taskListStore";
 import useBoardStore from "@src/store/boardStore";
+import useDnDActionStore from "@src/store/dndActionStore";
 
 import "./boardWorkspace.scss";
 
@@ -22,6 +24,10 @@ export default function BoardWorkspace({}: Props) {
     const boards = useBoardStore((state) => state.boards);
     const setCurrentBoard = useBoardStore((state) => state.setCurrentBoard);
     const currentBoard = useBoardStore((state) => state.currentBoard);
+
+    const handleDragAndDropAction = useDnDActionStore(
+        (state) => state.handleDragAndDropAction
+    );
 
     const showTasksListAddModal = useTasksListAddModalStore(
         (state) => state.showTasksListAddModal
@@ -49,11 +55,21 @@ export default function BoardWorkspace({}: Props) {
         }
     }, [currentBoard]);
 
+    const handleDragEnd = (event: any) => {
+        const { active, over } = event;
+
+        if (over) {
+            handleDragAndDropAction(active, over);
+        }
+    };
+
     return (
         <div className="board-workspace">
-            {tasksList.map((col: any) => (
-                <TaskList key={col.id} tasks={col} />
-            ))}
+            <DndContext onDragEnd={handleDragEnd}>
+                {tasksList.map((col: any) => (
+                    <TaskList key={col.id} tasks={col} />
+                ))}
+            </DndContext>
             <ListAndCardAddButton onClickHandler={showTasksListAddModal}>
                 Add another list
             </ListAndCardAddButton>
