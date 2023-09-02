@@ -17,7 +17,7 @@ type Props = {
     members: Members[];
 };
 
-export default function BoardTeamMember({ members }: Props) {
+export default function BoardTeamMember({ members = [] }: Props) {
     return (
         <div className="board-team-members">
             {members.map((member, idx) => (

@@ -74,7 +74,12 @@ export default function TaskList({ tasks }: Props) {
                     <></>
                 ) : (
                     taskArr.map((task: Tasks, idx: number) => (
-                        <TaskCard id={idx} key={idx} taskData={task} />
+                        <TaskCard
+                            id={idx}
+                            key={idx}
+                            taskData={task}
+                            currentTasklist={tasks}
+                        />
                     ))
                 )}
             </div>

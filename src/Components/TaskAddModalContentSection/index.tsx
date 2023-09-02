@@ -18,7 +18,7 @@ type Props = {};
 export default function TaskAddModalContentSection({}: Props) {
     const [isTitleEditing, setIsTitleEditing] = React.useState(false);
 
-    const title = useTaskAddStore((state) => state.title);
+    const activeTaskEdit = useTaskAddStore((state) => state.activeTaskEdit);
 
     const taskListInfo = useTaskListStore((state) => state.currentTaskList);
 
@@ -29,9 +29,7 @@ export default function TaskAddModalContentSection({}: Props) {
                     <TaskTitleAdd setIsTitleEditing={setIsTitleEditing} />
                 ) : (
                     <div className="title-wrapper">
-                        <p className="title">
-                            {title !== "" ? title : "Please Enter Your Title"}
-                        </p>
+                        <p className="title">{activeTaskEdit?.title}</p>
                         <OutlinedButton
                             icon={editIcon}
                             onClickHandler={() => setIsTitleEditing(true)}
@@ -42,7 +40,9 @@ export default function TaskAddModalContentSection({}: Props) {
                 )}
                 <p className="task-list-info">
                     in list{" "}
-                    <span className="task-list-name">{taskListInfo.title}</span>
+                    <span className="task-list-name">
+                        {taskListInfo?.title}
+                    </span>
                 </p>
             </div>
             <div className="task-description-wrapper">

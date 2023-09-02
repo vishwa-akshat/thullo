@@ -4,10 +4,14 @@ import { Typography } from "antd";
 // import { Draggable } from "react-beautiful-dnd";
 
 import TagsList from "@src/Components/TagsList";
+import AttachmentAndCommentInfo from "../AttachmentAndCommentInfo";
 import BoardTeamMember from "@src/Components/BoardTeamMembers";
 
+import useTaskAddModalStore from "@src/store/taskAddModalState";
+import useTaskListStore from "@src/store/taskListStore";
+import useTaskAddStore from "@src/store/taskAddStore";
+
 import "./taskCard.scss";
-import AttachmentAndCommentInfo from "../AttachmentAndCommentInfo";
 
 type Task = {
     id?: string;
@@ -28,18 +32,30 @@ type Task = {
 type Props = {
     taskData: Task;
     id: number;
+    currentTasklist: any;
 };
 
-export default function TaskCard({ taskData, id }: Props) {
+export default function TaskCard({ taskData, currentTasklist }: Props) {
+    const showTaskAddModal = useTaskAddModalStore(
+        (state) => state.showTaskAddModal
+    );
+
+    const setActiveTaskList = useTaskListStore(
+        (state) => state.setCurrentTaskList
+    );
+
+    const setActiveTaskEdit = useTaskAddStore(
+        (state) => state.setActiveTaskEdit
+    );
+
+    const handleCardClick = () => {
+        showTaskAddModal();
+        setActiveTaskList(currentTasklist);
+        setActiveTaskEdit(taskData);
+    };
+
     return (
-        // <Draggable draggableId={id.toString()} index={id}>
-        //     {(provided, snapshot) => (
-        <div
-            // ref={provided.innerRef}
-            // {...provided.draggableProps}
-            // {...provided.dragHandleProps}
-            className="task-card"
-        >
+        <div className="task-card" onClick={handleCardClick}>
             {taskData?.cover && (
                 <Image
                     className="cover"
@@ -61,14 +77,12 @@ export default function TaskCard({ taskData, id }: Props) {
             )}
 
             <div className="team-members-and-attachment-info">
-                {/* <BoardTeamMember members={members} /> */}
+                <BoardTeamMember members={taskData?.members} />
                 <AttachmentAndCommentInfo
                     comments={taskData?.comments}
                     attachments={taskData?.attachments}
                 />
             </div>
         </div>
-        //     )}
-        // </Draggable>
     );
 }
