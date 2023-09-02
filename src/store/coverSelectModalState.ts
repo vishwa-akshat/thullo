@@ -15,7 +15,7 @@ const useCoverSelectModalStore = create<CoverSelectModalState>((set) => ({
         set({ isCoverSelectModalOpen: true });
     },
     coverSelectModalHandleOk: (option) => {
-        useBoardStore.getState().setCoverSelectOfBoard(option);
+        useBoardStore.getState().setCoverOfBoard(option);
         set({ isCoverSelectModalOpen: false });
     },
     coverSelectModalHandleCancel: () => {

@@ -13,38 +13,22 @@ import useTaskAddStore from "@src/store/taskAddStore";
 
 import "./taskCard.scss";
 
-type Task = {
-    firebaseDocId?: string;
-    id?: string;
-    cover?: string;
-    title?: string;
-    labels: {
-        name: string;
-        color: string;
-    }[];
-    attachments?: any;
-    comments?: any;
-    members?: {
-        name: string;
-        avatar: string;
-    }[];
-};
-
 type Props = {
-    taskData: Task;
+    taskData: any;
     id: number;
     currentTasklist: any;
 };
 
 export default function TaskCard({ taskData, currentTasklist }: Props) {
-    const { attributes, listeners, setNodeRef, transform } = useDraggable({
-        id: `draggable-${taskData.id}`,
-        data: {
-            task: taskData,
-            taskListId: currentTasklist.firebaseDocId,
-            title: currentTasklist.title,
-        },
-    });
+    const { attributes, listeners, setNodeRef, transform, isDragging } =
+        useDraggable({
+            id: `draggable-${taskData.id}`,
+            data: {
+                task: taskData,
+                taskListId: currentTasklist.firebaseDocId,
+                title: currentTasklist.title,
+            },
+        });
 
     const showTaskAddModal = useTaskAddModalStore(
         (state) => state.showTaskAddModal
@@ -69,6 +53,10 @@ export default function TaskCard({ taskData, currentTasklist }: Props) {
               transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
           }
         : undefined;
+
+    if (isDragging) {
+        return <div className="dragging-task-card-space" />;
+    }
 
     return (
         <div

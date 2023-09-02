@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import React from "react";
 import { useParams } from "next/navigation";
-import { DndContext } from "@dnd-kit/core";
+import { DndContext, DragEndEvent, DragStartEvent } from "@dnd-kit/core";
 
 import TaskList from "@src/Components/TaskList";
 import ListAndCardAddButton from "@src/Components/ListAndCardAddButton";
@@ -18,6 +19,9 @@ import "./boardWorkspace.scss";
 type Props = {};
 
 export default function BoardWorkspace({}: Props) {
+    const [activeTask, setActiveTask] = React.useState(null);
+    const [isDragging, setIsDragging] = React.useState(false);
+
     const navigationParams = useParams();
     const boardName = navigationParams?.boardname?.replaceAll("%20", " ");
 
@@ -55,19 +59,31 @@ export default function BoardWorkspace({}: Props) {
         }
     }, [currentBoard]);
 
-    const handleDragEnd = (event: any) => {
+    const handleDragStart = (event: DragStartEvent) => {
+        setActiveTask(event.active.data.current.task);
+        setIsDragging(true);
+    };
+
+    const handleDragEnd = (event: DragEndEvent) => {
         const { active, over } = event;
 
         if (over) {
             handleDragAndDropAction(active, over);
+            setActiveTask(null);
+            setIsDragging(false);
         }
     };
 
     return (
         <div className="board-workspace">
-            <DndContext onDragEnd={handleDragEnd}>
+            <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
                 {tasksList.map((col: any) => (
-                    <TaskList key={col.id} tasks={col} />
+                    <TaskList
+                        isDragging={isDragging}
+                        activeTask={activeTask}
+                        key={col.id}
+                        tasks={col}
+                    />
                 ))}
             </DndContext>
             <ListAndCardAddButton onClickHandler={showTasksListAddModal}>

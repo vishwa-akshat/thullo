@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Typography } from "antd";
-import { useDroppable } from "@dnd-kit/core";
+import { useDroppable, DragOverlay } from "@dnd-kit/core";
 
 import TaskCard from "@src/Components/TaskCard";
 import ListAndCardAddButton from "@src/Components/ListAndCardAddButton";
@@ -30,7 +30,7 @@ type Props = {
     tasks: any;
 };
 
-export default function TaskList({ tasks }: Props) {
+export default function TaskList({ tasks, activeTask, isDragging }: Props) {
     const [taskArr, setTasksArr] = useState([]);
 
     const { isOver, setNodeRef } = useDroppable({
@@ -78,6 +78,15 @@ export default function TaskList({ tasks }: Props) {
                 </Typography.Text>
                 <TaskListColDropdown id={tasks.id} />
             </div>
+            {isDragging ? (
+                <DragOverlay>
+                    <TaskCard
+                        currentTasklist={tasks}
+                        taskData={activeTask}
+                        id={0}
+                    />
+                </DragOverlay>
+            ) : null}
             <div className="task-droppable-zone">
                 {taskArr.length === 0 ? (
                     <></>
