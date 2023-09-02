@@ -5,16 +5,8 @@ import { Divider } from "antd";
 import "./commentView.scss";
 import Avatar from "../Avatar";
 
-type Comment = {
-    id: number;
-    avatar: string;
-    name: string;
-    createdAt: string;
-    comment: string;
-};
-
 type Props = {
-    commentData: Comment;
+    commentData: any;
     isLast: boolean;
 };
 
@@ -23,10 +15,14 @@ export default function CommentView({ commentData, isLast }: Props) {
         <div className="comment-view">
             <div className="comment-view-header">
                 <div className="comment-profile-info">
-                    <Avatar name={commentData.name} />
+                    {commentData.userProfileImage === "" ? (
+                        <Avatar name={commentData?.userName} />
+                    ) : (
+                        <Avatar src={commentData?.userProfileImage} />
+                    )}
                     <div className="profile-info">
-                        <p className="name">{commentData.name}</p>
-                        <p className="date">{commentData.createdAt}</p>
+                        <p className="name">{commentData?.userName}</p>
+                        {/* <p className="date">{commentData?.timestamp}</p> */}
                     </div>
                 </div>
                 <div className="comment-actions-wrapper">
@@ -39,7 +35,7 @@ export default function CommentView({ commentData, isLast }: Props) {
                     </a>
                 </div>
             </div>
-            <p className="comment">{commentData.comment}</p>
+            <p className="comment">{commentData?.message}</p>
             {!isLast && <Divider />}
         </div>
     );

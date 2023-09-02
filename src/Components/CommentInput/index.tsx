@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { Input, Button, Form } from "antd";
+import { serverTimestamp } from "firebase/firestore";
 
 import Avatar from "@src/Components/Avatar";
 
@@ -20,7 +21,15 @@ export default function CommentInput({}: Props) {
     const addComment = useTaskAddStore((state) => state.addComment);
 
     const handleCommentSubmit = (value: { comment: string }) => {
-        addComment(value.comment);
+        const commentData = {
+            userId: user?.uid,
+            userProfileImage: user?.photoURL,
+            userName: user?.displayName,
+            timestamp: new Date(),
+            message: value.comment,
+        };
+        addComment(commentData);
+        value.comment = "";
     };
 
     return (

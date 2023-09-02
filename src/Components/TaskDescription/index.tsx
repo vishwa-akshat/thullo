@@ -19,7 +19,8 @@ export default function TaskDescription({}: Props) {
     const [isEdit, setIsEdit] = React.useState(false);
 
     const setDescription = useTaskAddStore((state) => state.setDescription);
-    const description = useTaskAddStore((state) => state.description);
+
+    const activeTaskEdit = useTaskAddStore((state) => state.activeTaskEdit);
 
     const handleDescriptionEditButtonClick = () => {
         setIsEdit(true);
@@ -61,12 +62,14 @@ export default function TaskDescription({}: Props) {
                 </>
             ) : (
                 <p className="description">
-                    {description === "" ||
-                    description.includes("<p><br></p>") ? (
+                    {activeTaskEdit?.description === "" ||
+                    activeTaskEdit?.description.includes("<p><br></p>") ? (
                         "Please enter a description"
                     ) : (
                         <p
-                            dangerouslySetInnerHTML={{ __html: description }}
+                            dangerouslySetInnerHTML={{
+                                __html: activeTaskEdit?.description,
+                            }}
                         ></p>
                     )}
                 </p>
