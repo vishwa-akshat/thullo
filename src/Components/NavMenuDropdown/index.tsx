@@ -7,7 +7,7 @@ import ProfileInfo from "@src/Components/ProfileInfo";
 
 import useUserStore from "@src/store/user";
 
-import "./navMenuDropdown.scss";
+import "./navMenuDropDown.scss";
 
 type Props = {};
 
