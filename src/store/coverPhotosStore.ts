@@ -1,14 +1,12 @@
 import { create } from "zustand";
 import { createApi } from "unsplash-js";
 
-import { Photos } from "./types/Photos";
-
 const unsplash = createApi({
     accessKey: `${process.env.UNSPLASH_ACCESS_KEY}`,
 });
 
 interface CoverPhotosState {
-    photos: Photos[];
+    photos: any;
     getPhotosList: () => void;
     getSearchedPhotos: (query: string) => void;
 }
@@ -20,7 +18,7 @@ const useCoverPhotosStore = create<CoverPhotosState>((set) => ({
             page: 1,
             perPage: 12,
         });
-        set({ photos: response.results });
+        set({ photos: response?.results });
     },
     getSearchedPhotos: async (query) => {
         const { response } = await unsplash.search.getPhotos({
@@ -28,7 +26,7 @@ const useCoverPhotosStore = create<CoverPhotosState>((set) => ({
             page: 1,
             perPage: 12,
         });
-        set({ photos: response.results });
+        set({ photos: response?.results });
     },
 }));
 

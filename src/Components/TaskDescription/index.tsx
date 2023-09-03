@@ -39,6 +39,7 @@ export default function TaskDescription({}: Props) {
                 icon={editIcon}
                 onClickHandler={handleDescriptionEditButtonClick}
                 isButtonHid={isEdit}
+                uploadProps={undefined}
             />
             {isEdit ? (
                 <>

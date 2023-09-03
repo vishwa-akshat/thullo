@@ -104,6 +104,7 @@ export default function BoardAddModal({}: Props) {
                 handleOk={visibilityModalHandleOk}
                 topPosition={310}
                 leftPosition={100}
+                isUpdate={false}
             />
             <CoverSelectModal
                 isOpen={isCoverSelectModalOpen}

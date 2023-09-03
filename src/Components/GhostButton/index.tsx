@@ -8,7 +8,7 @@ import "./ghostButton.scss";
 
 type Props = {
     children: string;
-    icon?: SVGProps<SVGElement>;
+    icon?: any;
     onClickHandler: () => void;
 };
 

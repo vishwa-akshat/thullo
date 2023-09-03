@@ -14,6 +14,7 @@ interface UserState {
     user: any;
     registerUser: (email: string, password: string) => void;
     loginUser: (email: string, password: string) => void;
+    signInWithGoogle: any;
     logoutUser: () => void;
 }
 

@@ -37,6 +37,7 @@ export default function TaskAttachment({}: Props) {
                 isUploadFeature={true}
                 uploadProps={props}
                 isButtonHid={true}
+                onClickHandler={() => null}
             />
             <div className="attachment-content-wrapper">
                 <TaskAttachmentsViewList />

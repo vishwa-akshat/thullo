@@ -16,7 +16,7 @@ export default function CommentsList({}: Props) {
 
     return (
         <div className="comments-list">
-            {activeTaskEdit?.comments?.map((comment, idx) => (
+            {activeTaskEdit?.comments?.map((comment: any, idx: number) => (
                 <CommentView
                     isLast={idx === activeTaskEdit.comments.length - 1}
                     key={comment.id}

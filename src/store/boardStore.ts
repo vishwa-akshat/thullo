@@ -17,19 +17,12 @@ interface BoardState {
     visibilityOfBoard: string;
     coverOfBoard: string;
     currentBoard: any;
-    setBoard: (boardInfo: Board) => void;
+    setBoard: (boardInfo: any) => void;
     setVisibilityOfBoard: (option: string) => void;
     setCoverOfBoard: (coverUrl: string) => void;
     fetchBoardData: () => void;
     setCurrentBoard: (value: any) => void;
     updateBoardVisibility: (value: any) => void;
-}
-interface Board {
-    columns: [];
-    id: string;
-    cover: string;
-    title: string;
-    visibility: string;
 }
 
 const DEFAULT_COVER =
@@ -43,7 +36,7 @@ const useBoardStore = create<BoardState>((set, get) => ({
     },
     visibilityOfBoard: "Public",
     coverOfBoard: DEFAULT_COVER,
-    setBoard: async (boardInfo: Board) => {
+    setBoard: async (boardInfo) => {
         try {
             const userId = useUserStore.getState().user?.uid;
             await addDoc(collection(db, `users/${userId}/boards`), {

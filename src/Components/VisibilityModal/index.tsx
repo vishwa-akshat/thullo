@@ -9,7 +9,7 @@ type Props = {
     topPosition: number;
     leftPosition: number;
     isOpen: boolean;
-    isUpdate?: boolean;
+    isUpdate: boolean;
     handleCancel: () => void;
     handleOk: (value: string) => void;
 };

@@ -21,7 +21,7 @@ export default function ImageList({ handleCancel, setCover }: Props) {
 
     return (
         <div className="images-list">
-            {photos.map((image, idx) => (
+            {photos.map((image: any, idx: number) => (
                 <Image
                     onClick={() => handleImageClick(image)}
                     className="cover-image"

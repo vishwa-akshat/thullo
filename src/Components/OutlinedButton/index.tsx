@@ -7,8 +7,8 @@ import "./outlinedButton.scss";
 
 type Props = {
     children: string;
-    icon?: SVGElement;
-    onClickHandler: () => void;
+    icon?: any;
+    onClickHandler?: () => void;
     width?: number;
     height?: number;
 };

@@ -4,7 +4,7 @@ import "./socialButton.scss";
 import Image from "next/image";
 
 type Props = {
-    icon: SVGImageElement;
+    icon: any;
     name: string;
     isDisable: boolean;
     onClickHandler: () => void;

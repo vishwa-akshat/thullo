@@ -8,7 +8,7 @@ import Image from "next/image";
 
 type Props = {
     children: string;
-    icon?: SVGProps<SVGElement>;
+    icon?: any;
     onClickHandler: () => void;
 };
 

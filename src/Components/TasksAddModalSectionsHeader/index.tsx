@@ -17,8 +17,8 @@ type Props = {
     iconHeight?: number;
     isButtonHid?: Boolean;
     isUploadFeature?: Boolean;
-    onClickHandler: () => void;
-    uploadProps: UploadProps;
+    onClickHandler?: () => void;
+    uploadProps?: UploadProps;
 };
 
 export default function TasksAddModalSectionsHeader({
