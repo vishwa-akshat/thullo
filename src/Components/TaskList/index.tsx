@@ -90,7 +90,11 @@ export default function TaskList({ tasks, activeTask, isDragging }: Props) {
                     ))
                 )}
             </div>
-            <div className="task-add-button-wrapper">
+            <div
+                className={
+                    taskArr.length !== 0 ? "task-add-button-wrapper" : ""
+                }
+            >
                 <ListAndCardAddButton onClickHandler={handleBtnClick}>
                     {tasks?.tasksList?.length === 0
                         ? "Add your card"
