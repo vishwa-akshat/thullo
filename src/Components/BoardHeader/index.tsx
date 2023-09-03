@@ -7,6 +7,9 @@ import BoardTeamMembers from "@src/Components/BoardTeamMembers";
 import moreIcon from "@src/assets/more.svg";
 import lockIcon from "@src/assets/lock.svg";
 
+import useVisibilityModalStore from "@src/store/visibilityModalState";
+import useBoardStore from "@src/store/boardStore";
+
 import "./boardHeader.scss";
 
 type Props = {};
@@ -31,13 +34,25 @@ const Members = [
 ];
 
 export default function BoardHeader({}: Props) {
+    const { showVisibilityModal } = useVisibilityModalStore();
+
+    const currentBoard = useBoardStore((state) => state.currentBoard);
+    const boards = useBoardStore((state) => state.boards);
+
+    const filteredBoard = boards.filter(
+        (board) => board.id === currentBoard.id
+    );
+
     return (
         <div className="board-header">
             <div className="team-members">
-                <GhostButton icon={lockIcon} onClickHandler={() => null}>
-                    Private
+                <GhostButton
+                    icon={lockIcon}
+                    onClickHandler={showVisibilityModal}
+                >
+                    {filteredBoard[0]?.visibility}
                 </GhostButton>
-                <BoardTeamMembers members={Members} />
+                {/* <BoardTeamMembers members={Members} /> */}
             </div>
             <GhostButton icon={moreIcon} onClickHandler={() => null}>
                 Show Menu

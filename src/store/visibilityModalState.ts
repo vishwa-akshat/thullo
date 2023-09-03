@@ -5,7 +5,7 @@ import useBoardStore from "./boardStore";
 interface VisibilityModalState {
     isVisibilityModalOpen: boolean;
     showVisibilityModal: () => void;
-    visibilityModalHandleOk: (optionName: string) => void;
+    visibilityModalHandleOk: (optionName: string, isUpdate?: boolean) => void;
     visibilityModalHandleCancel: () => void;
 }
 
@@ -14,8 +14,12 @@ const useVisibilityModalStore = create<VisibilityModalState>((set) => ({
     showVisibilityModal: () => {
         set({ isVisibilityModalOpen: true });
     },
-    visibilityModalHandleOk: (option) => {
-        useBoardStore.getState().setVisibilityOfBoard(option);
+    visibilityModalHandleOk: (option, isUpdate) => {
+        if (isUpdate) {
+            useBoardStore.getState().updateBoardVisibility(option);
+        } else {
+            useBoardStore.getState().setVisibilityOfBoard(option);
+        }
         set({ isVisibilityModalOpen: false });
     },
     visibilityModalHandleCancel: () => {

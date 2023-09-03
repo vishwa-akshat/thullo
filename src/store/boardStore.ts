@@ -1,6 +1,12 @@
 import uniqid from "uniqid";
 import { create } from "zustand";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import {
+    collection,
+    addDoc,
+    getDocs,
+    doc,
+    updateDoc,
+} from "firebase/firestore";
 
 import { db } from "@src/firebase/config";
 
@@ -16,6 +22,7 @@ interface BoardState {
     setCoverOfBoard: (coverUrl: string) => void;
     fetchBoardData: () => void;
     setCurrentBoard: (value: any) => void;
+    updateBoardVisibility: (value: any) => void;
 }
 interface Board {
     columns: [];
@@ -39,21 +46,36 @@ const useBoardStore = create<BoardState>((set, get) => ({
     setBoard: async (boardInfo: Board) => {
         try {
             const userId = useUserStore.getState().user?.uid;
-            const docRef = await addDoc(
-                collection(db, `users/${userId}/boards`),
-                {
-                    title: boardInfo.title,
-                    cover: boardInfo.cover,
-                    visibility: boardInfo.visibility,
-                    id: uniqid(),
-                }
-            );
+            await addDoc(collection(db, `users/${userId}/boards`), {
+                title: boardInfo.title,
+                cover: boardInfo.cover,
+                visibility: boardInfo.visibility,
+                id: uniqid(),
+            });
             get().fetchBoardData();
         } catch (e) {
             console.error("Error adding document: ", e);
         }
         set({ visibilityOfBoard: "Public" });
         set({ coverOfBoard: DEFAULT_COVER });
+    },
+    updateBoardVisibility: async (visibility) => {
+        try {
+            const userId = useUserStore.getState().user?.uid;
+            await updateDoc(
+                doc(
+                    db,
+                    `users/${userId}/boards`,
+                    get().currentBoard.firebaseDocId
+                ),
+                {
+                    visibility: visibility,
+                }
+            );
+            get().fetchBoardData();
+        } catch (e) {
+            console.error("Error upating document: ", e);
+        }
     },
     fetchBoardData: async () => {
         try {

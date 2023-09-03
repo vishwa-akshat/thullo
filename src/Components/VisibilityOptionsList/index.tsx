@@ -8,7 +8,10 @@ import lockIcon from "@src/assets/lock.svg";
 
 import "./visibilityOptionsList.scss";
 
-type Props = {};
+type Props = {
+    handleOk: (value: string, isUpadte: boolean) => void;
+    isUpdate: boolean;
+};
 
 const visibilityOption = [
     {
@@ -23,16 +26,12 @@ const visibilityOption = [
     },
 ];
 
-export default function VisibilityOptionsList({}: Props) {
-    const visibilityModalHandleOk = useVisibilityModalStore(
-        (state) => state.visibilityModalHandleOk
-    );
-
+export default function VisibilityOptionsList({ handleOk, isUpdate }: Props) {
     return (
         <div className="option-wrapper">
             {visibilityOption.map((option, idx) => (
                 <div
-                    onClick={() => visibilityModalHandleOk(option.name)}
+                    onClick={() => handleOk(option.name, isUpdate)}
                     key={idx}
                     className="option"
                 >
