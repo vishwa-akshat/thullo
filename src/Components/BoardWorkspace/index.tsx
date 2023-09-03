@@ -16,6 +16,7 @@ import TaskList from "@src/Components/TaskList";
 import ListAndCardAddButton from "@src/Components/ListAndCardAddButton";
 import TasksListAddModal from "@src/Components/TasksListAddModal";
 import TaskNameAddModal from "@src/Components/TaskNameAddModal";
+import TasksListRenameModal from "@src/Components/TasksListRenameModal";
 
 import useTasksListAddModalStore from "@src/store/tasksListAddModalState";
 import useTaskListStore from "@src/store/taskListStore";
@@ -67,7 +68,7 @@ export default function BoardWorkspace({}: Props) {
         }
     }, [currentBoard]);
 
-    const handleDragStart = (event: DragStartEvent) => {
+    const handleDragStart = (event: any) => {
         setActiveTask(event.active.data.current.task);
         setIsDragging(true);
     };
@@ -84,7 +85,7 @@ export default function BoardWorkspace({}: Props) {
 
     const mouseSensor = useSensor(MouseSensor, {
         activationConstraint: {
-            delay: 100,
+            delay: 80,
             tolerance: 1,
         },
     });
@@ -118,6 +119,7 @@ export default function BoardWorkspace({}: Props) {
             </ListAndCardAddButton>
             <TasksListAddModal />
             <TaskNameAddModal />
+            <TasksListRenameModal />
         </div>
     );
 }

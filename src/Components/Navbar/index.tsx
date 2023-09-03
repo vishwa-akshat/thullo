@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import { Divider } from "antd";
 
@@ -28,9 +29,9 @@ export default function Navbar({}: Props) {
 
     return (
         <div className="navbar">
-            <div className="logo-wrapper">
+            <Link href="/" className="logo-wrapper">
                 <Image src={Logo} alt="thullo logo" />
-            </div>
+            </Link>
             {Object.keys(navigationParams).length !== 0 && (
                 <div className="board-nav-info">
                     <p>{boardName}</p>

@@ -22,7 +22,7 @@ type Props = {
 export default function TaskList({ tasks, activeTask, isDragging }: Props) {
     const [taskArr, setTasksArr] = useState([]);
 
-    const { isOver, setNodeRef } = useDroppable({
+    const { setNodeRef } = useDroppable({
         id: `droppable-${tasks.id}`,
         data: {
             taskListId: tasks.firebaseDocId,
@@ -65,7 +65,7 @@ export default function TaskList({ tasks, activeTask, isDragging }: Props) {
                 <Typography.Text className="task-title">
                     {tasks.title}
                 </Typography.Text>
-                <TaskListColDropdown id={tasks.id} />
+                <TaskListColDropdown tasks={tasks} id={tasks.firebaseDocId} />
             </div>
             {isDragging ? (
                 <DragOverlay>
