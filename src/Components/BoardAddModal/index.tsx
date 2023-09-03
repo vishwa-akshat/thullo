@@ -34,14 +34,17 @@ export default function BoardAddModal({}: Props) {
         (state) => state.showVisibilityModal
     );
 
-    const showCoverSelectModal = useCoverSelectModalStore(
-        (state) => state.showCoverSelectModal
-    );
+    const {
+        showCoverSelectModal,
+        isCoverSelectModalOpen,
+        coverSelectModalHandleCancel,
+    } = useCoverSelectModalStore();
 
     const visibilityOfBoard = useBoardStore((state) => state.visibilityOfBoard);
     const coverOfBoard = useBoardStore((state) => state.coverOfBoard);
+    const setCoverOfBoard = useBoardStore((state) => state.setCoverOfBoard);
 
-    const handleTitleChange = (event) => {
+    const handleTitleChange = (event: any) => {
         setTitle(event.target.value);
     };
 
@@ -93,7 +96,13 @@ export default function BoardAddModal({}: Props) {
                 </GhostButton>
             </div>
             <VisibilityModal topPosition={310} leftPosition={100} />
-            <CoverSelectModal topPosition={310} leftPosition={-80} />
+            <CoverSelectModal
+                isOpen={isCoverSelectModalOpen}
+                handleCancel={coverSelectModalHandleCancel}
+                topPosition={310}
+                leftPosition={-80}
+                setCover={setCoverOfBoard}
+            />
         </Modal>
     );
 }

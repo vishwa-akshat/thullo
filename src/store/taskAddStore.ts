@@ -15,6 +15,7 @@ interface TaskAddState {
     setTitle: (title: string) => void;
     setDescription: (description: string) => void;
     addComment: (comment: any) => void;
+    updateCover: (cover: any) => void;
 }
 
 const useTaskAddStore = create<TaskAddState>((set, get) => ({
@@ -78,6 +79,27 @@ const useTaskAddStore = create<TaskAddState>((set, get) => ({
                     ...state.activeTaskEdit,
                     comments: [...state.activeTaskEdit.comments, comment],
                 },
+            }));
+            useTasksStore
+                .getState()
+                .fetchTasksData(currentTaskList.firebaseDocId);
+        } catch (err) {
+            console.error(err);
+        }
+    },
+    updateCover: async (cover) => {
+        try {
+            const userId = useUserStore.getState().user?.uid;
+            const currentBoard = useBoardStore.getState().currentBoard;
+            const currentTaskList = useTaskListStore.getState().currentTaskList;
+            const docRef = doc(
+                db,
+                `users/${userId}/boards/${currentBoard.firebaseDocId}/columns/${currentTaskList.firebaseDocId}/tasks`,
+                get().activeTaskEdit.firebaseDocId
+            );
+            await updateDoc(docRef, { cover });
+            set((state) => ({
+                activeTaskEdit: { ...state.activeTaskEdit, cover },
             }));
             useTasksStore
                 .getState()

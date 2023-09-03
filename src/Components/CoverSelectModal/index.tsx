@@ -14,12 +14,18 @@ import "./coverSelectModal.scss";
 type Props = {
     topPosition: number;
     leftPosition: number;
+    isOpen: boolean;
+    handleCancel: () => void;
+    setCover: (value: string) => void;
 };
 
-export default function CoverSelectModal({ topPosition, leftPosition }: Props) {
-    const { isCoverSelectModalOpen, coverSelectModalHandleCancel } =
-        useCoverSelectModalStore();
-
+export default function CoverSelectModal({
+    setCover,
+    isOpen,
+    handleCancel,
+    topPosition,
+    leftPosition,
+}: Props) {
     const getPhotosList = useCoverPhotosStore((state) => state.getPhotosList);
 
     useEffect(() => {
@@ -30,8 +36,8 @@ export default function CoverSelectModal({ topPosition, leftPosition }: Props) {
         <Modal
             style={{ top: topPosition, left: leftPosition }}
             className="cover-select-modal"
-            open={isCoverSelectModalOpen}
-            onCancel={coverSelectModalHandleCancel}
+            open={isOpen}
+            onCancel={handleCancel}
             footer={null}
             closeIcon={null}
         >
@@ -41,7 +47,7 @@ export default function CoverSelectModal({ topPosition, leftPosition }: Props) {
                 <SearchInput />
             </div>
             <div className="image-list-wrapper">
-                <ImageList />
+                <ImageList setCover={setCover} handleCancel={handleCancel} />
             </div>
         </Modal>
     );

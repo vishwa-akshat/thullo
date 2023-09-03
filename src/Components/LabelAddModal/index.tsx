@@ -12,7 +12,11 @@ import "./labelAddModal.scss";
 import Image from "next/image";
 import TagsList from "../TagsList";
 
-type Props = {};
+type Props = {
+    isOpen: boolean;
+    handleOk: (title: string) => void;
+    handleCancel: () => void;
+};
 
 const tags = [
     {
@@ -25,7 +29,11 @@ const tags = [
     },
 ];
 
-export default function LabelAddModal({}: Props) {
+export default function LabelAddModal({
+    isOpen,
+    handleCancel,
+    handleOk,
+}: Props) {
     const [title, setTitle] = React.useState("");
 
     const handleTitleChange = (event: {
@@ -34,20 +42,14 @@ export default function LabelAddModal({}: Props) {
         setTitle(event.target.value);
     };
 
-    const {
-        isLabelAddModalOpen,
-        labelAddModalHandleOk,
-        labelAddModalHandleCancel,
-    } = useLabelAddModalStore();
-
     return (
         <Modal
             className="label-add-modal"
             closeIcon={false}
-            open={isLabelAddModalOpen}
+            open={isOpen}
             okText="Add"
-            onOk={() => labelAddModalHandleOk(title)}
-            onCancel={labelAddModalHandleCancel}
+            onOk={() => handleOk(title)}
+            onCancel={handleCancel}
         >
             <div className="label-add-modal-header">
                 <p className="title">Label</p>
