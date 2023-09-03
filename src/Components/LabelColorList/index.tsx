@@ -2,9 +2,12 @@ import React from "react";
 
 import "./labelColorList.scss";
 
-type Props = {};
+type Props = {
+    color: string;
+    setColor: (value: string) => void;
+};
 
-export default function LabelColorList({}: Props) {
+export default function LabelColorList({ color, setColor }: Props) {
     const colors = [
         {
             colorCode: "#c41d7f",
@@ -51,13 +54,26 @@ export default function LabelColorList({}: Props) {
             colorName: "purple",
         },
     ];
+
+    const handleColorClick = (colour: {
+        colorCode?: string;
+        colorName: string;
+    }) => {
+        setColor(colour.colorName);
+    };
+
     return (
         <div className="label-color-list">
-            {colors.map((color, idx) => (
+            {colors.map((colour, idx) => (
                 <div
-                    className="color-block"
+                    onClick={() => handleColorClick(colour)}
+                    className={
+                        color === colour.colorName
+                            ? "active-color color-block"
+                            : "color-block"
+                    }
                     key={idx}
-                    style={{ background: color.colorCode }}
+                    style={{ background: colour.colorCode }}
                 />
             ))}
         </div>

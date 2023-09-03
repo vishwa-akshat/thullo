@@ -16,6 +16,7 @@ interface TaskAddState {
     setDescription: (description: string) => void;
     addComment: (comment: any) => void;
     updateCover: (cover: any) => void;
+    updateLabel: (label: any) => void;
 }
 
 const useTaskAddStore = create<TaskAddState>((set, get) => ({
@@ -78,6 +79,30 @@ const useTaskAddStore = create<TaskAddState>((set, get) => ({
                 activeTaskEdit: {
                     ...state.activeTaskEdit,
                     comments: [...state.activeTaskEdit.comments, comment],
+                },
+            }));
+            useTasksStore
+                .getState()
+                .fetchTasksData(currentTaskList.firebaseDocId);
+        } catch (err) {
+            console.error(err);
+        }
+    },
+    updateLabel: async (label) => {
+        try {
+            const userId = useUserStore.getState().user?.uid;
+            const currentBoard = useBoardStore.getState().currentBoard;
+            const currentTaskList = useTaskListStore.getState().currentTaskList;
+            const docRef = doc(
+                db,
+                `users/${userId}/boards/${currentBoard.firebaseDocId}/columns/${currentTaskList.firebaseDocId}/tasks`,
+                get().activeTaskEdit.firebaseDocId
+            );
+            await updateDoc(docRef, { labels: arrayUnion(label) });
+            set((state) => ({
+                activeTaskEdit: {
+                    ...state.activeTaskEdit,
+                    labels: [...state.activeTaskEdit.labels, label],
                 },
             }));
             useTasksStore

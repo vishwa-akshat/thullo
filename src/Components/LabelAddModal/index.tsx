@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
-import { Input, Modal } from "antd";
+import { message, Input, Modal } from "antd";
 
 import LabelColorList from "@src/Components/LabelColorList";
 
-import useLabelAddModalStore from "@src/store/labelAddModalState";
+import useTaskAddStore from "@src/store/taskAddStore";
 
 import labelIcon from "@src/assets/label.svg";
 
@@ -14,7 +14,7 @@ import TagsList from "../TagsList";
 
 type Props = {
     isOpen: boolean;
-    handleOk: (title: string) => void;
+    handleOk: () => void;
     handleCancel: () => void;
 };
 
@@ -35,11 +35,33 @@ export default function LabelAddModal({
     handleOk,
 }: Props) {
     const [title, setTitle] = React.useState("");
+    const [color, setColor] = React.useState("");
+
+    const [messageApi, contextHolder] = message.useMessage();
+
+    const updateLabel = useTaskAddStore((state) => state.updateLabel);
 
     const handleTitleChange = (event: {
         target: { value: React.SetStateAction<string> };
     }) => {
         setTitle(event.target.value);
+    };
+
+    const handleLabelModalOk = () => {
+        if (title === "") {
+            messageApi.open({
+                type: "warning",
+                content: "Enter the label text",
+            });
+        } else if (color === "") {
+            messageApi.open({
+                type: "warning",
+                content: "Select the label color",
+            });
+        } else {
+            updateLabel({ name: title, color });
+            handleOk();
+        }
     };
 
     return (
@@ -48,9 +70,10 @@ export default function LabelAddModal({
             closeIcon={false}
             open={isOpen}
             okText="Add"
-            onOk={() => handleOk(title)}
+            onOk={handleLabelModalOk}
             onCancel={handleCancel}
         >
+            {contextHolder}
             <div className="label-add-modal-header">
                 <p className="title">Label</p>
                 <p className="info">Select a name and a color</p>
@@ -61,9 +84,9 @@ export default function LabelAddModal({
                 onChange={handleTitleChange}
             />
             <div className="label-color-list-wrapper">
-                <LabelColorList />
+                <LabelColorList color={color} setColor={setColor} />
             </div>
-            <div className="available-tags-wrapper">
+            {/* <div className="available-tags-wrapper">
                 <div className="available-tags-heading">
                     <Image
                         width={12}
@@ -77,7 +100,7 @@ export default function LabelAddModal({
                 <div className="labels-list">
                     <TagsList tags={tags} />
                 </div>
-            </div>
+            </div> */}
         </Modal>
     );
 }

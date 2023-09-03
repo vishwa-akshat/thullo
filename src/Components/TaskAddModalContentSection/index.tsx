@@ -1,10 +1,11 @@
 import React from "react";
 
 import TaskDescription from "@src/Components/TaskDescription";
-import TaskAttachment from "@src/Components/TaskAttachment";
+// import TaskAttachment from "@src/Components/TaskAttachment";
 import TaskAddModalCommentsSection from "@src/Components/TaskAddModalCommentsSection";
 import TaskTitleAdd from "@src/Components/TaskTitleAdd";
-import OutlinedButton from "../OutlinedButton";
+import OutlinedButton from "@src/Components/OutlinedButton";
+import TagsList from "@src/Components/TagsList";
 
 import editIcon from "@src/assets/edit.svg";
 
@@ -24,6 +25,9 @@ export default function TaskAddModalContentSection({}: Props) {
 
     return (
         <div className="task-add-modal-content-section">
+            <div className="tags-list-wrapper">
+                <TagsList tags={activeTaskEdit?.labels} />
+            </div>
             <div className="section-header">
                 {isTitleEditing ? (
                     <TaskTitleAdd setIsTitleEditing={setIsTitleEditing} />

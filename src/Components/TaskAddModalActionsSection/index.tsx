@@ -36,12 +36,12 @@ export default function TaskAddModalActionsSection({}: Props) {
     const updateCover = useTaskAddStore((state) => state.updateCover);
 
     const buttonsArr = [
-        {
-            id: "1",
-            name: "Members",
-            icon: groupIcon,
-            action: null,
-        },
+        // {
+        //     id: "1",
+        //     name: "Members",
+        //     icon: groupIcon,
+        //     action: null,
+        // },
         {
             id: "2",
             name: "Labels",
