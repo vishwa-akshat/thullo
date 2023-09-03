@@ -13,21 +13,10 @@ import useTasksStore from "@src/store/tasksStore";
 
 import "./taskList.scss";
 
-type Tasks = {
-    id: string;
-    image: string;
-    title: string;
-    tags: { name: string; color: string }[];
-    attachments: number;
-    comments: number;
-    members: {
-        name: string;
-        avatar: string;
-    }[];
-};
-
 type Props = {
     tasks: any;
+    activeTask: any;
+    isDragging: boolean;
 };
 
 export default function TaskList({ tasks, activeTask, isDragging }: Props) {
@@ -50,7 +39,7 @@ export default function TaskList({ tasks, activeTask, isDragging }: Props) {
 
     useEffect(() => {
         const reqArr = tasksArray.filter(
-            (task) => task.taskListId === tasks.firebaseDocId
+            (task: any) => task.taskListId === tasks.firebaseDocId
         );
         if (reqArr.length > 0) {
             setTasksArr(reqArr[0].tasks);
@@ -91,7 +80,7 @@ export default function TaskList({ tasks, activeTask, isDragging }: Props) {
                 {taskArr.length === 0 ? (
                     <></>
                 ) : (
-                    taskArr.map((task: Tasks, idx: number) => (
+                    taskArr.map((task: any, idx: number) => (
                         <TaskCard
                             id={idx}
                             key={idx}

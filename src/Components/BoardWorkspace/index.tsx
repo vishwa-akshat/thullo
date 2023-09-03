@@ -2,7 +2,15 @@
 "use client";
 import React from "react";
 import { useParams } from "next/navigation";
-import { DndContext, DragEndEvent, DragStartEvent } from "@dnd-kit/core";
+import {
+    DndContext,
+    DragEndEvent,
+    DragStartEvent,
+    MouseSensor,
+    TouchSensor,
+    useSensor,
+    useSensors,
+} from "@dnd-kit/core";
 
 import TaskList from "@src/Components/TaskList";
 import ListAndCardAddButton from "@src/Components/ListAndCardAddButton";
@@ -74,9 +82,28 @@ export default function BoardWorkspace({}: Props) {
         }
     };
 
+    const mouseSensor = useSensor(MouseSensor, {
+        activationConstraint: {
+            delay: 100,
+            tolerance: 1,
+        },
+    });
+    const touchSensor = useSensor(TouchSensor, {
+        activationConstraint: {
+            delay: 100,
+            tolerance: 1,
+        },
+    });
+
+    const sensors = useSensors(mouseSensor, touchSensor);
+
     return (
         <div className="board-workspace">
-            <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+            <DndContext
+                onDragStart={handleDragStart}
+                onDragEnd={handleDragEnd}
+                sensors={sensors}
+            >
                 {tasksList.map((col: any) => (
                     <TaskList
                         isDragging={isDragging}
