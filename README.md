@@ -1,4 +1,4 @@
-# Thullo - Task and Project Management Application
+# Thullo - Task and Project Management Application (WIP)
 
 Thullo is a feature-rich task and project management application designed to streamline your workflow. With a user-friendly interface and a powerful set of features, Thullo helps you organize your tasks, collaborate with your team, and stay on top of your projects.
 
