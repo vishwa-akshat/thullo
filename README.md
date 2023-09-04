@@ -7,17 +7,20 @@ Thullo is a feature-rich task and project management application designed to str
 ## Table of Contents
 
 -   [Screenshots](#screenshots)
+-   [Demo](#demo)
 -   [Features](#features)
 -   [Tech Stack](#tech-stack)
 -   [Installation](#installation)
 -   [Usage](#usage)
--   [Contributing](#contributing)
--   [License](#license)
 
 ## Screenshots
 
 ![Website](./public/Thullo-board.png)
 ![Website](./public/Thullo.png)
+
+## Demo
+
+You can see a live demo of Metaversus [here](https://thullo-three.vercel.app/).
 
 ## Features
 
