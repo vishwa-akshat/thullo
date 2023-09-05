@@ -21,7 +21,7 @@ export default function CommentView({ commentData, isLast }: Props) {
                         <Avatar src={commentData?.userProfileImage} />
                     )}
                     <div className="profile-info">
-                        <p className="name">{commentData?.userName}</p>
+                        <div className="name">{commentData?.userName}</div>
                         {/* <p className="date">{commentData?.timestamp}</p> */}
                     </div>
                 </div>
@@ -35,7 +35,7 @@ export default function CommentView({ commentData, isLast }: Props) {
                     </a>
                 </div>
             </div>
-            <p className="comment">{commentData?.message}</p>
+            <div className="comment">{commentData?.message}</div>
             {!isLast && <Divider />}
         </div>
     );

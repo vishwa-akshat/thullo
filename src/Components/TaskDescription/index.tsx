@@ -62,18 +62,18 @@ export default function TaskDescription({}: Props) {
                     </div>
                 </>
             ) : (
-                <p className="description">
+                <div className="description">
                     {activeTaskEdit?.description === "" ||
                     activeTaskEdit?.description.includes("<p><br></p>") ? (
                         "Please enter a description"
                     ) : (
-                        <p
+                        <div
                             dangerouslySetInnerHTML={{
                                 __html: activeTaskEdit?.description,
                             }}
-                        ></p>
+                        ></div>
                     )}
-                </p>
+                </div>
             )}
         </div>
     );

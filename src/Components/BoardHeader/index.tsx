@@ -40,7 +40,7 @@ export default function BoardHeader({}: Props) {
     const boards = useBoardStore((state) => state.boards);
 
     const filteredBoard = boards.filter(
-        (board) => board.id === currentBoard.id
+        (board) => board?.id === currentBoard?.id
     );
 
     return (

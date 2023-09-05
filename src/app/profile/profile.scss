@@ -1,0 +1,59 @@
+.profile-container {
+    .header {
+        margin-top: 2rem;
+        text-align: center;
+
+        .heading {
+            color: #000;
+            font-size: 36px;
+            font-weight: 400;
+        }
+
+        .sub-heading {
+            color: #000;
+            font-size: 18px;
+            font-weight: 300;
+        }
+    }
+
+    .profile-info-divider {
+        margin: 0;
+    }
+
+    .info-wrapper {
+        width: 900px;
+        border: 1px solid #e0e0e0;
+        border-radius: 12px;
+        margin: 45px auto 0;
+
+        .info-header {
+            padding: 30px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+
+            .info {
+                h2 {
+                    color: #000;
+                    font-size: 24px;
+                    font-weight: 400;
+                }
+                p {
+                    color: #828282;
+                    font-size: 13px;
+                    font-weight: 500;
+                }
+            }
+
+            .edit-btn {
+                width: 95px;
+                height: 38px;
+                color: #828282;
+                font-size: 16px;
+                font-weight: 500;
+                border-radius: 12px;
+            }
+        }
+    }
+}

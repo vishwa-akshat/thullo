@@ -13,7 +13,7 @@ type Props = {
     tags: Task[];
 };
 
-export default function TagsList({ tags }: Props) {
+export default function TagsList({ tags = [] }: Props) {
     return (
         <div className="tags-list">
             {tags.map((tag) => (
