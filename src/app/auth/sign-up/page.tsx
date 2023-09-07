@@ -7,21 +7,27 @@ import { Button, Form, Input } from "antd";
 import logo from "@src/assets/Logo.svg";
 import mailIcon from "@src/assets/mail.svg";
 import lockIcon from "@src/assets/lock.svg";
+import personIcon from "@src/assets/person.svg";
 
 import SocialButtonsList from "@src/Components/SocialButtonsList";
 
 import useUserStore from "@src/store/user";
 
-import { emailInputRules, passwordInputRules } from "@src/app/auth/inputRules";
+import {
+    nameInputRules,
+    emailInputRules,
+    passwordInputRules,
+} from "@src/app/auth/inputRules";
 
 import "./signUp.scss";
 import { redirect } from "next/navigation";
+import useAuth from "@src/firebase/auth";
 
 type Props = {};
 
 export default function SignUp({}: Props) {
     const user = useUserStore((state) => state.user);
-    const registerUser = useUserStore((state) => state.registerUser);
+    const { registerUser } = useAuth();
 
     React.useEffect(() => {
         if (user) {
@@ -29,8 +35,14 @@ export default function SignUp({}: Props) {
         }
     }, [user]);
 
-    const handleSignUp = (values: { email: string; password: string }) => {
-        registerUser(values.email, values.password);
+    const handleSignUp = (values: {
+        name: string;
+        email: string;
+        password: string;
+    }) => {
+        const { name, email, password } = values;
+
+        registerUser({ name, email, password });
     };
 
     return (
@@ -43,6 +55,20 @@ export default function SignUp({}: Props) {
                     Effectively
                 </p>
                 <Form name="Register" onFinish={handleSignUp}>
+                    <Form.Item name="name" rules={nameInputRules}>
+                        <Input
+                            className="user-creds-input"
+                            placeholder="Full Name"
+                            prefix={
+                                <Image
+                                    src={personIcon}
+                                    alt="name"
+                                    height={24}
+                                    width={24}
+                                />
+                            }
+                        />
+                    </Form.Item>
                     <Form.Item name="email" rules={emailInputRules}>
                         <Input
                             className="user-creds-input"
@@ -58,7 +84,7 @@ export default function SignUp({}: Props) {
                         />
                     </Form.Item>
                     <Form.Item name="password" rules={passwordInputRules}>
-                        <Input
+                        <Input.Password
                             className="user-creds-input"
                             placeholder="Password"
                             prefix={

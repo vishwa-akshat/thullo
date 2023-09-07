@@ -7,14 +7,14 @@ import facebookIcon from "@src/assets/facebook.svg";
 import twitterIcon from "@src/assets/twitter.svg";
 import githubIcon from "@src/assets/github.svg";
 
-import useUserStore from "@src/store/user";
+import useAuth from "@src/firebase/auth";
 
 import "./socialButtonsList.scss";
 
 type Props = {};
 
 export default function SocialButtonsList({}: Props) {
-    const signInWithGoogle = useUserStore((state) => state.signInWithGoogle);
+    const { signInWithGoogle } = useAuth();
 
     const buttonsArr = [
         {

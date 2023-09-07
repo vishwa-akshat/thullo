@@ -12,14 +12,14 @@ import SocialButtonsList from "@src/Components/SocialButtonsList";
 
 import "./login.scss";
 import { redirect } from "next/navigation";
-import useUserStore from "@src/store/user";
 import { emailInputRules, passwordInputRules } from "../inputRules";
+
+import useAuth from "@src/firebase/auth";
 
 type Props = {};
 
 export default function Login({}: Props) {
-    const user = useUserStore((state) => state.user);
-    const loginUser = useUserStore((state) => state.loginUser);
+    const { user, loginUser } = useAuth();
 
     React.useEffect(() => {
         if (user) {
@@ -28,7 +28,8 @@ export default function Login({}: Props) {
     }, [user]);
 
     const handleLogIn = (values: { email: string; password: string }) => {
-        loginUser(values.email, values.password);
+        const { email, password } = values;
+        loginUser({ email, password });
     };
 
     return (
@@ -52,7 +53,7 @@ export default function Login({}: Props) {
                         />
                     </Form.Item>
                     <Form.Item name="password" rules={passwordInputRules}>
-                        <Input
+                        <Input.Password
                             className="user-creds-input"
                             placeholder="Password"
                             prefix={

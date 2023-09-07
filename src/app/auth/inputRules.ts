@@ -24,3 +24,10 @@ export const passwordInputRules = [
             "Password must contain at least one uppercase letter, one lowercase letter, and one number",
     },
 ];
+
+export const nameInputRules = [
+    {
+        required: true,
+        message: "Please enter your name",
+    },
+];

@@ -5,14 +5,14 @@ import type { MenuProps } from "antd";
 
 import ProfileInfo from "@src/Components/ProfileInfo";
 
-import useUserStore from "@src/store/user";
+import useAuth from "@src/firebase/auth";
 
 import "./navMenuDropDown.scss";
 
 type Props = {};
 
 export default function NavMenuDropDown({}: Props) {
-    const logoutUser = useUserStore((state) => state.logoutUser);
+    const { logOut } = useAuth();
 
     const items: MenuProps["items"] = [
         {
@@ -27,7 +27,7 @@ export default function NavMenuDropDown({}: Props) {
             key: "2",
             danger: true,
             label: (
-                <div onClick={logoutUser} className="menu-items-text">
+                <div onClick={logOut} className="menu-items-text">
                     Logout
                 </div>
             ),
