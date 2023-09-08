@@ -7,6 +7,7 @@ import {
     signInWithEmailAndPassword,
     signInWithPopup,
     signOut,
+    updateProfile,
 } from "firebase/auth";
 import useUserStore from "@src/store/user";
 import { doc, getDoc, setDoc } from "firebase/firestore";
@@ -40,6 +41,7 @@ const useAuth = () => {
             try {
                 await setDoc(userDocRef, {
                     createdAt,
+                    bio: null,
                     ...userObj.providerData[0],
                     ...additionalData,
                 });
@@ -77,8 +79,10 @@ const useAuth = () => {
                 password
             );
             await createUserDocumentFromAuth(user, {
-                displayName: name,
                 uid: user.uid,
+            });
+            await updateProfile(auth.currentUser || user, {
+                displayName: name,
             });
         } catch (err) {
             console.error(err);

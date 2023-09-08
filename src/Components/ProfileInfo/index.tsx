@@ -8,7 +8,7 @@ import Avatar from "@src/Components/Avatar";
 
 import ArrowDown from "@src/assets/Arrow-down.svg";
 
-import useUserStore from "@src/store/user";
+import useAuth from "@src/firebase/auth";
 
 import "./profileInfo.scss";
 
@@ -17,7 +17,7 @@ type Props = {};
 const { Text } = Typography;
 
 export default function ProfileInfo({}: Props) {
-    const user = useUserStore((state) => state.user);
+    const { user } = useAuth();
 
     if (!user) {
         return <></>;
@@ -25,11 +25,13 @@ export default function ProfileInfo({}: Props) {
 
     return (
         <div className="profile-info-wrapper">
-            {user.photoURL !== null ? <Avatar src={user.photoURL} /> : null}
+            {user.photoURL !== null ? (
+                <Avatar src={user?.photoURL} />
+            ) : (
+                <Avatar name={user?.displayName} />
+            )}
 
-            <Text className="name">
-                {user.displayName ? user.displayName : user.email}
-            </Text>
+            <Text className="name">{user?.displayName}</Text>
             <Image
                 className="arrow-down-icon"
                 src={ArrowDown}

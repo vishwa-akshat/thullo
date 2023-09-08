@@ -1,14 +1,37 @@
 "use client";
-import React from "react";
+import { useEffect } from "react";
 
 import "./profile.scss";
 import OutlinedButton from "@src/Components/OutlinedButton";
 import { Button, Divider } from "antd";
 import Image from "next/image";
+import useUserProfileStore from "@src/store/userProfile";
+import useUserStore from "@src/store/user";
+import { redirect } from "next/navigation";
+import Avatar from "@src/Components/Avatar";
 
 type Props = {};
 
 export default function Profile({}: Props) {
+    const userProfile = useUserProfileStore((state) => state.userProfile);
+    const fetchUserProfile = useUserProfileStore(
+        (state) => state.fetchUserProfile
+    );
+
+    const user = useUserStore((state) => state.user);
+
+    useEffect(() => {
+        fetchUserProfile();
+    }, []);
+
+    if (!user) {
+        redirect("/auth/login");
+    }
+
+    if (!userProfile) {
+        return <></>;
+    }
+
     return (
         <div className="profile-container">
             <div className="header">
@@ -29,33 +52,38 @@ export default function Profile({}: Props) {
                 <div className="data-block pd-sm">
                     <div className="data-name">Photo</div>
                     <div className="data-value">
-                        <Image
-                            src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1287&q=80"
-                            width={72}
-                            height={72}
-                            alt="avatar"
-                        />
+                        {userProfile.photoURL ? (
+                            <Avatar size={72} src={userProfile?.photoURL} />
+                        ) : (
+                            <Avatar size={72} name={userProfile?.displayName} />
+                        )}
                     </div>
                 </div>
                 <Divider className="profile-info-divider" />
                 <div className="data-block">
                     <div className="data-name">Name</div>
-                    <div className="data-value">Xanthe Neal</div>
+                    <div className="data-value">{userProfile?.displayName}</div>
                 </div>
                 <Divider className="profile-info-divider" />
                 <div className="data-block">
                     <div className="data-name">Bio</div>
-                    <div className="data-value">I am a software developer</div>
+                    <div className="data-value">
+                        {userProfile.bio ? userProfile.bio : "no bio"}
+                    </div>
                 </div>
                 <Divider className="profile-info-divider" />
                 <div className="data-block">
                     <div className="data-name">Phone</div>
-                    <div className="data-value">90854654564</div>
+                    <div className="data-value">
+                        {userProfile.phoneNumber
+                            ? userProfile.phoneNumber
+                            : "no phoneNumber"}
+                    </div>
                 </div>
                 <Divider className="profile-info-divider" />
                 <div className="data-block">
                     <div className="data-name">Email</div>
-                    <div className="data-value">xanthe.neal@gmail.com</div>
+                    <div className="data-value">{userProfile?.email}</div>
                 </div>
                 <Divider className="profile-info-divider" />
             </div>
