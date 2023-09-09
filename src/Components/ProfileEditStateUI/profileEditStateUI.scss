@@ -1,9 +1,68 @@
 .profile-edit-container {
     width: 900px;
-    margin: 4rem auto 0;
+    margin: 6rem auto 0;
+
+    .back-wrapper {
+        cursor: pointer;
+        color: #2d9cdb;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 24px;
+    }
 
     .edit-wrapper {
+        padding: 30px 48px;
         border: 1px solid #e0e0e0;
         border-radius: 12px;
+
+        .header {
+            .heading {
+                color: #000;
+                font-size: 24px;
+                font-weight: 400;
+            }
+
+            .sub-heading {
+                color: #828282;
+                font-size: 13px;
+                font-weight: 500;
+            }
+        }
+
+        .profile-edit-form {
+            width: 50%;
+            margin-top: 25px;
+
+            .form-item-wrapper {
+                .ant-form-item-label {
+                    padding-bottom: 5px;
+                    color: #4f4f4f;
+                    font-size: 13px;
+                    font-weight: 500;
+                }
+
+                .profile-edit-input {
+                    border-radius: 12px;
+                    height: 50px;
+                    border: 1px solid #828282;
+                    box-shadow: none;
+                }
+                .profile-edit-textarea {
+                    border-radius: 12px;
+                    border: 1px solid #828282;
+                    box-shadow: none;
+                }
+
+                .form-save-btn {
+                    width: 82px;
+                    height: 38px;
+                    background: #2f80ed;
+                    color: #fff;
+                    font-size: 16px;
+                    font-weight: 500;
+                }
+            }
+        }
     }
 }

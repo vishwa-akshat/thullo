@@ -60,7 +60,7 @@ export default function ProfileDataUI({
                     <div className="data-value">
                         {userProfile.phoneNumber
                             ? userProfile.phoneNumber
-                            : "no phoneNumber"}
+                            : "no phone number"}
                     </div>
                 </div>
                 <Divider className="profile-info-divider" />
