@@ -42,7 +42,10 @@ export default function Profile({}: Props) {
     return (
         <>
             {isEdit ? (
-                <ProfileEditStateUI handleEditGoback={handleEditGoback} />
+                <ProfileEditStateUI
+                    userProfile={userProfile}
+                    handleEditGoback={handleEditGoback}
+                />
             ) : (
                 <ProfileDataUI
                     handleEditBtnClick={handleEditBtnClick}

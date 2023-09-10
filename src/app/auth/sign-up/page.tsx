@@ -17,7 +17,7 @@ import {
     nameInputRules,
     emailInputRules,
     passwordInputRules,
-} from "@src/app/auth/inputRules";
+} from "@src/utils/inputRules";
 
 import "./signUp.scss";
 import { redirect } from "next/navigation";

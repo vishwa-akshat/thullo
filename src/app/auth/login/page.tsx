@@ -12,7 +12,7 @@ import SocialButtonsList from "@src/Components/SocialButtonsList";
 
 import "./login.scss";
 import { redirect } from "next/navigation";
-import { emailInputRules, passwordInputRules } from "../inputRules";
+import { emailInputRules, passwordInputRules } from "../../../utils/inputRules";
 
 import useAuth from "@src/firebase/auth";
 

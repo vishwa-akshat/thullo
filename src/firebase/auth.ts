@@ -80,8 +80,9 @@ const useAuth = () => {
             );
             await createUserDocumentFromAuth(user, {
                 uid: user.uid,
+                displayName: name,
             });
-            await updateProfile(auth.currentUser || user, {
+            await updateProfile(auth.currentUser, {
                 displayName: name,
             });
         } catch (err) {
