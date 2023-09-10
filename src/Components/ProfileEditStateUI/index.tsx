@@ -13,6 +13,7 @@ import arrowBackIcon from "@src/assets/arrowBack.svg";
 import useUserProfileStore from "@src/store/userProfile";
 
 import "./profileEditStateUI.scss";
+import ProfilePictureUpload from "../ProfilePictureUpload";
 
 type Props = {
     userProfile: any;
@@ -69,6 +70,10 @@ export default function ProfileEditStateUI({
                     <p className="sub-heading">
                         Changes will be reflected to every services
                     </p>
+                </div>
+                <div className="picture-upload-wrapper">
+                    <ProfilePictureUpload />
+                    Change Photo
                 </div>
                 <Form
                     onFinish={handleFormSubmit}

@@ -30,6 +30,17 @@
             }
         }
 
+        .picture-upload-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            color: #828282;
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            margin-top: 26px;
+        }
+
         .profile-edit-form {
             width: 50%;
             margin-top: 25px;

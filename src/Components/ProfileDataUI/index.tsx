@@ -35,11 +35,11 @@ export default function ProfileDataUI({
                 <div className="data-block pd-sm">
                     <div className="data-name">Photo</div>
                     <div className="data-value">
-                        {userProfile.photoURL ? (
-                            <Avatar size={72} src={userProfile?.photoURL} />
-                        ) : (
-                            <Avatar size={72} name={userProfile?.displayName} />
-                        )}
+                        <Avatar
+                            size={72}
+                            src={userProfile?.photoURL}
+                            name={userProfile?.displayName}
+                        />
                     </div>
                 </div>
                 <Divider className="profile-info-divider" />
