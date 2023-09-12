@@ -8,26 +8,28 @@ import TasksAddModalSectionsHeader from "@src/Components/TasksAddModalSectionsHe
 
 import editIcon from "@src/assets/edit.svg";
 
-import useTaskAddStore from "@src/store/taskAddStore";
+import "./boardAndTaskDescription.scss";
 
-import "./taskDescription.scss";
+type Props = {
+    className?: string;
+    description: string;
+    onSubmit: (value: string) => void;
+};
 
-type Props = {};
-
-export default function TaskDescription({}: Props) {
+export default function BoardAndTaskDescription({
+    className = "",
+    onSubmit,
+    description = "",
+}: Props) {
     const [value, setValue] = React.useState("");
     const [isEdit, setIsEdit] = React.useState(false);
-
-    const setDescription = useTaskAddStore((state) => state.setDescription);
-
-    const activeTaskEdit = useTaskAddStore((state) => state.activeTaskEdit);
 
     const handleDescriptionEditButtonClick = () => {
         setIsEdit(true);
     };
 
     const handleDescriptionSubmit = () => {
-        setDescription(value);
+        onSubmit(value);
         setIsEdit(false);
     };
 
@@ -44,6 +46,7 @@ export default function TaskDescription({}: Props) {
             {isEdit ? (
                 <>
                     <ReactQuill
+                        className={className}
                         theme="snow"
                         value={value}
                         onChange={setValue}
@@ -63,13 +66,14 @@ export default function TaskDescription({}: Props) {
                 </>
             ) : (
                 <div className="description">
-                    {activeTaskEdit?.description === "" ||
-                    activeTaskEdit?.description.includes("<p><br></p>") ? (
+                    {!description ||
+                    description === "" ||
+                    description?.includes("<p><br></p>") ? (
                         "Please enter a description"
                     ) : (
                         <div
                             dangerouslySetInnerHTML={{
-                                __html: activeTaskEdit?.description,
+                                __html: description,
                             }}
                         ></div>
                     )}

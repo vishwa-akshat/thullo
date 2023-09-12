@@ -6,7 +6,7 @@ import { Button } from "antd";
 import "./outlinedButton.scss";
 
 type Props = {
-    children: string;
+    children: any;
     icon?: any;
     onClickHandler?: () => void;
     width?: number;

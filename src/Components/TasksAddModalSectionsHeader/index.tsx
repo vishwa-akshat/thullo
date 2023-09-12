@@ -10,9 +10,9 @@ import "./tasksAddModalSectionsHeader.scss";
 import { Upload } from "antd";
 
 type Props = {
-    icon: SVGElement;
+    icon?: SVGElement;
     title: string;
-    btnText: string;
+    btnText?: string;
     iconWidth?: number;
     iconHeight?: number;
     isButtonHid?: Boolean;

@@ -1,0 +1,35 @@
+.board-menu-drawer-team-members-wrapper {
+    .members-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .member-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .member-info {
+                display: flex;
+                gap: 15px;
+                align-items: center;
+
+                img {
+                    border-radius: 8px;
+                }
+
+                .member-name {
+                    color: #333;
+                    font-size: 14px;
+                    font-weight: 700;
+                }
+            }
+
+            .admin-text {
+                color: #bdbdbd;
+                font-size: 12px;
+                font-weight: 500;
+            }
+        }
+    }
+}

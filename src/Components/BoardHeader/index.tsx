@@ -11,6 +11,7 @@ import useVisibilityModalStore from "@src/store/visibilityModalState";
 import useBoardStore from "@src/store/boardStore";
 
 import "./boardHeader.scss";
+import useBoardMenuDrawerStore from "@src/store/boardMenuDrawerState";
 
 type Props = {};
 
@@ -36,6 +37,10 @@ const Members = [
 export default function BoardHeader({}: Props) {
     const { showVisibilityModal } = useVisibilityModalStore();
 
+    const showBoardMenuDrawer = useBoardMenuDrawerStore(
+        (state) => state.showBoardMenuDrawer
+    );
+
     const currentBoard = useBoardStore((state) => state.currentBoard);
     const boards = useBoardStore((state) => state.boards);
 
@@ -54,7 +59,7 @@ export default function BoardHeader({}: Props) {
                 </GhostButton>
                 {/* <BoardTeamMembers members={Members} /> */}
             </div>
-            <GhostButton icon={moreIcon} onClickHandler={() => null}>
+            <GhostButton icon={moreIcon} onClickHandler={showBoardMenuDrawer}>
                 Show Menu
             </GhostButton>
         </div>

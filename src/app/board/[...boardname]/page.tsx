@@ -8,16 +8,15 @@ import BoardWorkspace from "@src/Components/BoardWorkspace";
 import TaskAddModal from "@src/Components/TaskAddModal";
 import VisibilityModal from "@src/Components/VisibilityModal";
 
-import useUserStore from "@src/store/user";
 import useBoardStore from "@src/store/boardStore";
 import useVisibilityModalStore from "@src/store/visibilityModalState";
 
 import "./board.scss";
+import BoardMenuDrawer from "@src/Components/BoardMenuDrawer";
 
 type Props = {};
 
 export default function Board({}: Props) {
-    const user = useUserStore((state) => state.user);
     const fetchBoardData = useBoardStore((state) => state.fetchBoardData);
 
     const {
@@ -25,10 +24,6 @@ export default function Board({}: Props) {
         visibilityModalHandleCancel,
         visibilityModalHandleOk,
     } = useVisibilityModalStore();
-
-    if (!user) {
-        redirect("/auth/login");
-    }
 
     React.useEffect(() => {
         fetchBoardData();
@@ -51,6 +46,7 @@ export default function Board({}: Props) {
                 leftPosition={-580}
                 isUpdate={true}
             />
+            <BoardMenuDrawer />
         </div>
     );
 }

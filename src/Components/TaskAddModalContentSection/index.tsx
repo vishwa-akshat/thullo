@@ -1,6 +1,6 @@
 import React from "react";
 
-import TaskDescription from "@src/Components/TaskDescription";
+import TaskDescription from "@src/Components/BoardAndTaskDescription";
 // import TaskAttachment from "@src/Components/TaskAttachment";
 import TaskAddModalCommentsSection from "@src/Components/TaskAddModalCommentsSection";
 import TaskTitleAdd from "@src/Components/TaskTitleAdd";
@@ -20,6 +20,7 @@ export default function TaskAddModalContentSection({}: Props) {
     const [isTitleEditing, setIsTitleEditing] = React.useState(false);
 
     const activeTaskEdit = useTaskAddStore((state) => state.activeTaskEdit);
+    const setDescription = useTaskAddStore((state) => state.setDescription);
 
     const taskListInfo = useTaskListStore((state) => state.currentTaskList);
 
@@ -50,7 +51,10 @@ export default function TaskAddModalContentSection({}: Props) {
                 </p>
             </div>
             <div className="task-description-wrapper">
-                <TaskDescription />
+                <TaskDescription
+                    onSubmit={setDescription}
+                    description={activeTaskEdit?.description}
+                />
             </div>
             {/* <div className="task-attachment-wrapper">
                 <TaskAttachment />

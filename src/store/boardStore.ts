@@ -23,6 +23,7 @@ interface BoardState {
     fetchBoardData: () => void;
     setCurrentBoard: (value: any) => void;
     updateBoardVisibility: (value: any) => void;
+    updateBoardDescription: (value: any) => void;
 }
 
 const DEFAULT_COVER =
@@ -38,11 +39,14 @@ const useBoardStore = create<BoardState>((set, get) => ({
     coverOfBoard: DEFAULT_COVER,
     setBoard: async (boardInfo) => {
         try {
-            const userId = useUserStore.getState().user?.uid;
-            await addDoc(collection(db, `users/${userId}/boards`), {
+            const user = useUserStore.getState().user;
+            await addDoc(collection(db, `users/${user.uid}/boards`), {
                 title: boardInfo.title,
                 cover: boardInfo.cover,
                 visibility: boardInfo.visibility,
+                description: null,
+                members: [{ ...user, isAdmin: true }],
+                createdAt: new Date(),
                 id: uniqid(),
             });
             get().fetchBoardData();
@@ -63,6 +67,24 @@ const useBoardStore = create<BoardState>((set, get) => ({
                 ),
                 {
                     visibility: visibility,
+                }
+            );
+            get().fetchBoardData();
+        } catch (e) {
+            console.error("Error upating document: ", e);
+        }
+    },
+    updateBoardDescription: async (description) => {
+        try {
+            const userId = useUserStore.getState().user?.uid;
+            await updateDoc(
+                doc(
+                    db,
+                    `users/${userId}/boards`,
+                    get().currentBoard.firebaseDocId
+                ),
+                {
+                    description,
                 }
             );
             get().fetchBoardData();

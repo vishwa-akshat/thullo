@@ -1,0 +1,36 @@
+.board-menu-drawer-header {
+    .made-by-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: #bdbdbd;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .drawer-admin-info-wrapper {
+        margin-top: 12px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        .admin-image {
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .admin-info {
+            .admin-name {
+                color: #333;
+                font-size: 14px;
+                font-weight: 700;
+            }
+
+            .date-created-at {
+                color: #bdbdbd;
+                font-size: 12px;
+                font-weight: 600;
+            }
+        }
+    }
+}
