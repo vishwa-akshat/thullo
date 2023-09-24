@@ -9,7 +9,8 @@
         border: 1px solid #bdbdbd;
         background: #fff;
         padding: 50px;
-        width: 480px;
+        max-width: 480px;
+        width: 80%;
 
         .heading {
             color: #333;
@@ -56,6 +57,17 @@
                 color: #2d9cdb;
                 text-decoration: none;
             }
+        }
+    }
+}
+
+@media only screen and (max-width: 510px) {
+    .login-page-container {
+        .login-card {
+            border-radius: 0;
+            border: none;
+            padding: 40px;
+            width: 100%;
         }
     }
 }
