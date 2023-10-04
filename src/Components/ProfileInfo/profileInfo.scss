@@ -10,3 +10,12 @@
         font-weight: 700;
     }
 }
+
+@media only screen and (max-width: 512px) {
+    .profile-info-wrapper {
+        justify-content: flex-end;
+        .name {
+            display: none;
+        }
+    }
+}

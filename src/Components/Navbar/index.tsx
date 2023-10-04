@@ -28,22 +28,24 @@ export default function Navbar({}: Props) {
     }
 
     return (
-        <div className="navbar">
-            <Link href="/" className="logo-wrapper">
-                <Image src={Logo} alt="thullo logo" />
-            </Link>
-            {Object.keys(navigationParams).length !== 0 && (
-                <div className="board-nav-info">
-                    <p>{boardName}</p>
-                    <Divider type="vertical" />
-                    <GhostButton icon={appLogo} onClickHandler={() => null}>
-                        All board
-                    </GhostButton>
+        <div className="navbar-res-wrapper">
+            <div className="navbar">
+                <Link href="/" className="logo-wrapper">
+                    <Image src={Logo} alt="thullo logo" />
+                </Link>
+                {Object.keys(navigationParams).length !== 0 && (
+                    <div className="board-nav-info">
+                        <p>{boardName}</p>
+                        <Divider type="vertical" />
+                        <GhostButton icon={appLogo} onClickHandler={() => null}>
+                            All board
+                        </GhostButton>
+                    </div>
+                )}
+                <div className="navbar-options">
+                    {/* <SearchBar /> */}
+                    <NavMenuDropDown />
                 </div>
-            )}
-            <div className="navbar-options">
-                <SearchBar />
-                <NavMenuDropDown />
             </div>
         </div>
     );
