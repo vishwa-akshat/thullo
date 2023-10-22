@@ -34,7 +34,7 @@ export default function ProfileEditStateUI({
         bio: string | undefined;
         phoneNumber: string | undefined;
     }) => {
-        const details = {};
+        const details: any = {};
         const { displayName, email, bio, phoneNumber } = values;
 
         if (displayName) {

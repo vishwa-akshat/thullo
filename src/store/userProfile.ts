@@ -40,8 +40,8 @@ const useUserProfileStore = create<UserProfileState>((set, get) => ({
             await updateDoc(userDocRef, {
                 ...details,
             });
-
-            await updateProfile(auth.currentUser, {
+            const { currentUser }: any = auth;
+            await updateProfile(currentUser, {
                 ...dub,
             });
 

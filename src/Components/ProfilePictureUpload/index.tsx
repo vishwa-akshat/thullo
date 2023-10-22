@@ -74,7 +74,9 @@ export default function ProfilePictureUpload({}: Props) {
 
             const downloadURL = await getDownloadURL(snapshot.ref);
 
-            await updateProfile(auth.currentUser, {
+            const { currentUser }: any = auth;
+
+            await updateProfile(currentUser, {
                 photoURL: downloadURL,
             });
 

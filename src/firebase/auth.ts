@@ -78,11 +78,12 @@ const useAuth = () => {
                 email,
                 password
             );
+            const { currentUser }: any = auth;
             await createUserDocumentFromAuth(user, {
                 uid: user.uid,
                 displayName: name,
             });
-            await updateProfile(auth.currentUser, {
+            await updateProfile(currentUser, {
                 displayName: name,
             });
         } catch (err) {

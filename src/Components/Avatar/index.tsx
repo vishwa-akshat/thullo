@@ -13,9 +13,9 @@ type Props = {
 };
 
 export default function Avatar({ name = "Jon Doe", src, size = 32 }: Props) {
-    const nameArr = name.split(" ");
-    const firstName = nameArr[0];
-    const lastName = nameArr[1];
+    const nameArr = name?.split(" ");
+    const firstName = nameArr[0] ? nameArr[0] : " ";
+    const lastName = nameArr[1] ? nameArr[1] : " ";
 
     return (
         <div className="avatar-wrapper">
