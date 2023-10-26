@@ -76,9 +76,17 @@ export default function TaskCard({ taskData, currentTasklist }: Props) {
                     width={220}
                 />
             )}
-            <Typography.Text className="title">
-                {taskData?.title}
-            </Typography.Text>
+            <div className="team-members-and-attachment-info">
+                {/* <BoardTeamMember members={taskData?.members} /> */}
+                <Typography.Text className="title">
+                    {taskData?.title}
+                </Typography.Text>
+                <AttachmentAndCommentInfo
+                    comments={taskData?.comments}
+                    attachments={taskData?.attachments}
+                />
+            </div>
+
             {taskData.labels.length === 0 ? (
                 <></>
             ) : (
@@ -86,14 +94,6 @@ export default function TaskCard({ taskData, currentTasklist }: Props) {
                     <TagsList tags={taskData.labels} />
                 </div>
             )}
-
-            <div className="team-members-and-attachment-info">
-                <BoardTeamMember members={taskData?.members} />
-                <AttachmentAndCommentInfo
-                    comments={taskData?.comments}
-                    attachments={taskData?.attachments}
-                />
-            </div>
         </div>
     );
 }

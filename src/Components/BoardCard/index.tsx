@@ -57,7 +57,7 @@ export default function BoardCard({ cardData: { cover, title } }: Props) {
                 alt="background"
             />
             <Typography.Title className="title">{title}</Typography.Title>
-            <AvatarList members={members} />
+            {/* <AvatarList members={members} /> */}
         </div>
     );
 }
